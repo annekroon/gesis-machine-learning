@@ -36,6 +36,7 @@ infowarsarticles = []
 for filename in infowarsfiles:
     with open(filename) as f:
 	    infowarsarticles.append(f.read())
+      
 ```
 
 - Can you explain what the `glob` function does?
@@ -61,10 +62,9 @@ To arrive at a model that will do just that, you have to transform 'text' to 'fe
 
 ### 5. Fit a classifier
 
-- Try out a simple supervised model. Find some inspiration [here](https://github.com/uvacw/teachteacher-python/blob/main/day4/exercises-2/possible-solution-exercise-2.md#build-a-simple-classifier). Can you predict the `source` using linguistic variations in the articles?
+- Try out a simple supervised model. Find some inspiration [here](possible-solution-exercise-day1.md). Can you predict the `source` using linguistic variations in the articles?
 
 - Which combination of pre-processing steps + vectorizer gives the best results?
-
 
 
 ### BONUS: Inceasing efficiency + reusability

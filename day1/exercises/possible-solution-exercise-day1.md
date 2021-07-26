@@ -1,6 +1,4 @@
-## Exercise 2: Working with textual data - possible solutions
-
-
+## Exercise 1 Working with textual data - possible solutions
 
 ----------
 
