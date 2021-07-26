@@ -8,6 +8,8 @@
 *.toc
 *.fmt
 
+.DS_Store
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*

@@ -1,6 +1,6 @@
 # gesis-machine-learning
 
-This repository contains study materials belonging to the course "(A practical introduction to Machine Learning)[https://training.gesis.org/?site=pDetails&child=full&pID=0x5F6D5D9F21934389B6F217EA093F8180&subID=0xD00A750313384AFC8E83C510C6662B3B]" (Gesis, 27.09 - 01.10.2021) by Damian Trilling and Anne Kroon.
+This repository contains study materials belonging to the course "[A practical introduction to Machine Learning](https://training.gesis.org/?site=pDetails&child=full&pID=0x5F6D5D9F21934389B6F217EA093F8180&subID=0xD00A750313384AFC8E83C510C6662B3B]" (Gesis, 27.09 - 01.10.2021) by Damian Trilling and Anne Kroon.
 
 # Course description
 
