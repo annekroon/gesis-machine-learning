@@ -1,6 +1,6 @@
 # gesis-machine-learning
 
-This repository contains study materials belonging to the course "[A practical introduction to Machine Learning](https://training.gesis.org/?site=pDetails&child=full&pID=0x5F6D5D9F21934389B6F217EA093F8180&subID=0xD00A750313384AFC8E83C510C6662B3B)" (Gesis, 27.09 - 01.10.2021) by Damian Trilling and Anne Kroon.
+This repository contains study materials belonging to the course "[A practical introduction to Machine Learning](https://training.gesis.org/?site=pDetails&child=full&pID=0x5F6D5D9F21934389B6F217EA093F8180&subID=0xD00A750313384AFC8E83C510C6662B3B)" ([Gesis](https://www.gesis.org/home), 27.09 - 01.10.2021) by Damian Trilling and Anne Kroon.
 
 ------
 
@@ -13,25 +13,25 @@ The course will provide insights into the concepts, challenges and opportunities
 
 # Schedule
 
-* [Monday](day1/): From text to features
-      *  Introduction
-      *  Working with Python: A refresher
-      *  From text to features
-              * Vectorizers
-              * document-term matrix
+* [Monday](day1/): **From text to features**
+    - Introduction
+    - Working with Python: A refresher
+    - From text to features
+      - Vectorizers
+      - document-term matrix
 
-      * Exercise: Setting up a simple machine learning algorithm using count/ tfidf vectorizers
+  - Exercise: Setting up a simple machine learning algorithm using count/ tfidf vectorizers
 
-* [Tuesday](day2/): Natural Language Processing and feature engineering
-      * NLP techniques (pre-processing, regular expressions)
-      * Advanced NLP-techniques, such as Named Entity Recognition (NER), using `spaCy` and `NLTK`
+* [Tuesday](day2/):  **Language Processing and feature engineering**
 
-      * Exercise: Extend feature engineering of yesterday's dataset, and investigate effects on performance of the classifier
+    - NLP techniques (pre-processing, regular expressions)
+    - Advanced NLP-techniques, such as Named Entity Recognition (NER), using `spaCy` and `NLTK`
+    - Exercise: Extend feature engineering of yesterday's dataset, and investigate effects on performance of the classifier
 
-* [Wednesday](day3/): Unsupervised Machine learning
+* [Wednesday](day3/): **Unsupervised Machine learning**
 
-* [Thursday](day4/): Supervised Machine Learning
+* [Thursday](day4/): **Supervised Machine Learning**
 
-* [Friday](day5/): Advances in Machine Learning
-      *   Word embeddings
-      *   Deep learning with `Keras`
+* [Friday](day5/): **Advances in Machine Learning**
+    - Word embeddings
+    - Deep learning with `Keras`
