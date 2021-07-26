@@ -1,7 +1,7 @@
 # Exercise 2: NLP and feature engineering
 ----
 
-In this exercise, we will use the same dataset as [yesterday's exercise ](../day1/exercises/exercise-text-to-features.md). Today, we will use this data for analysis and feature extraction using NLP. These are important components of feature engineering: moving from textual data to a feature set that can be used in a classification model.
+In this exercise, we will use the same dataset as [yesterday's exercise ](../../day1/exercises/exercise-text-to-features.md). Today, we will use this data for analysis and feature extraction using NLP. These are important components of feature engineering: moving from textual data to a feature set that can be used in a classification model.
 
 ### 1. Read in the data
 
