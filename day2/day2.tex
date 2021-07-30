@@ -92,7 +92,7 @@
 		\begin{columns}
 			\column{.3\textwidth}
 			\makebox[\columnwidth]{
-				\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../media/mannetje.png}}
+				\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/mannetje.png}}
 			\column{.7\textwidth}
 			\large
 			\textcolor{orange}{\textbf{\emph{#1}}}
@@ -101,10 +101,11 @@
 
 
 
-\title[Big Data and Automated Content Analysis]{\textbf{Teaching the Teacher} \\ Day 4 - Morning » From text to features: Natural Language Processing«}
-\author[Anne Kroon]{Anne Kroon \\ ~ \\ \footnotesize{a.c.kroon@uva.nl \\@annekroon} \\ }
-\date{July 1, 2021}
-\institute[UvA]{Afdeling Communicatiewetenschap \\Universiteit van Amsterdam}
+\title[Big Data and Automated Content Analysis]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 2 - Tuesday \\ »From text to features: Natural Language Processing «}
+\author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
+\date{September 28, 2021}
+\institute[Gesis]{Gesis}
+
 
 \begin{document}
 	
@@ -125,7 +126,7 @@ Automated content analysis can be either \textcolor{red}{bottom-up} (inductive, 
 
 \begin{frame}{The ACA toolbox}
 \makebox[\columnwidth]{
-\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../media/boumanstrilling2016}}
+\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/boumanstrilling2016}}
 \\
 \cite{Boumans2016}
 \end{frame}
@@ -755,8 +756,8 @@ over een saneringsfonds voor banken. Daarmee staat de laatste
 for line in tekst:
 matchObj=re.match(r" +([0-9]+) of ([0-9]+) DOCUMENTS",line)
 if matchObj:
-numberofarticle= int(matchObj.group(1))
-totalnumberofarticles= int(matchObj.group(2))
+    numberofarticle= int(matchObj.group(1))
+    totalnumberofarticles= int(matchObj.group(2))
 \end{lstlisting}
 \end{frame}
 
