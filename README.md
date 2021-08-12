@@ -13,6 +13,21 @@ The course will provide insights into the concepts, challenges and opportunities
 
 # Schedule
 
+## General schedule
+
+|   |    |
+| -- | -- |
+| 09.00—11.00 |     Lecture Part I   |
+| 11:00—12.30:|   Exercises Part I   |
+| 12.30—13.30:|    Lunch break       |
+| 13.30—15.30:|    Lecture Part II   |
+| 15.30—16.30:|     Exercises Part II |
+| 16.30—17.00:|  Plenary discussion exercises / wrap up |
+
+
+
+## Topics per day
+
 * [Monday](day1/): **From text to features**
     - Introduction
     - Working with Python: A refresher
