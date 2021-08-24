@@ -1,0 +1,184 @@
+% !TeX document-id = {f19fb972-db1f-447e-9d78-531139c30778}
+% !BIB program = biber
+\documentclass[compress]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{pifont}
+\usetheme[block=fill,subsectionpage=progressbar,sectionpage=progressbar]{metropolis} 
+
+\usepackage{wasysym}
+\usepackage{etoolbox}
+\usepackage[utf8]{inputenc}
+
+\usepackage{threeparttable}
+\usepackage{subcaption}
+
+\usepackage{tikz-qtree}
+\setbeamercovered{still covered={\opaqueness<1->{5}},again covered={\opaqueness<1->{100}}}
+
+
+\usepackage{listings}
+
+\lstset{
+	basicstyle=\scriptsize\ttfamily,
+	columns=flexible,
+	breaklines=true,
+	numbers=left,
+	%stepsize=1,
+	numberstyle=\tiny,
+	backgroundcolor=\color[rgb]{0.85,0.90,1}
+}
+
+
+
+\lstnewenvironment{lstlistingoutput}{\lstset{basicstyle=\footnotesize\ttfamily,
+		columns=flexible,
+		breaklines=true,
+		numbers=left,
+		%stepsize=1,
+		numberstyle=\tiny,
+		backgroundcolor=\color[rgb]{.7,.7,.7}}}{}
+
+
+\lstnewenvironment{lstlistingoutputtiny}{\lstset{basicstyle=\tiny\ttfamily,
+		columns=flexible,
+		breaklines=true,
+		numbers=left,
+		%stepsize=1,
+		numberstyle=\tiny,
+		backgroundcolor=\color[rgb]{.7,.7,.7}}}{}
+
+
+
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[style=apa, backend = biber]{biblatex}
+\DeclareLanguageMapping{american}{american-UoN}
+\addbibresource{../literature.bib }
+\renewcommand*{\bibfont}{\tiny}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,matrix}
+\usepackage{multicol}
+
+\usepackage{subcaption}
+
+\usepackage{booktabs}
+\usepackage{graphicx}
+
+\graphicspath{{../pictures/}}
+
+\makeatletter
+\setbeamertemplate{headline}{%
+	\begin{beamercolorbox}[colsep=1.5pt]{upper separation line head}
+	\end{beamercolorbox}
+	\begin{beamercolorbox}{section in head/foot}
+		\vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+	\end{beamercolorbox}%
+	\begin{beamercolorbox}[colsep=1.5pt]{lower separation line head}
+	\end{beamercolorbox}
+}
+\makeatother
+
+
+
+\setbeamercolor{section in head/foot}{fg=normal text.bg, bg=structure.fg}
+
+
+
+\newcommand{\question}[1]{
+	\begin{frame}[plain]
+		\begin{columns}
+			\column{.3\textwidth}
+			\makebox[\columnwidth]{
+				\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{mannetje.png}}
+			\column{.7\textwidth}
+			\large
+			\textcolor{orange}{\textbf{\emph{#1}}}
+		\end{columns}
+\end{frame}}
+
+\newcommand{\instruction}[1]{\emph{\textcolor{gray}{[#1]}}}
+
+
+
+
+
+\title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 5 -- Thursday \\ »Next steps«}
+\author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
+\date{September 30, 2021}
+\institute[Gesis]{Gesis}
+
+
+
+\begin{document}
+
+\begin{frame}{}
+	\titlepage
+\end{frame}
+
+\begin{frame}{This part: State of the art and next steps}
+	\tableofcontents
+\end{frame}
+
+
+
+\setbeamercovered{transparent}
+
+\section{Hot and happening: Transformers}
+
+\begin{frame}[standout]
+TODO IETS TOEVOEGEN OVER BERT EN TRANSFORMERS EN ZO
+\end{frame}
+
+\begin{frame}{The idea}
+\begin{block}{BERT: Bidirectional Encoder Representations from Transformers 	\parencite{BERT}}
+	\begin{itemize}[<+->]
+		\item (Huge) pre-trained model (by, e.g., Google) that is fine-tuned for specific task (by you)
+		\item In simple neural networks, identical words have identical meanings -- but meaning can depend on context
+		\item Therefore, the model should take context into accounts. For example, in LSRTM we use \emph{sequences} of words.
+		\item But meaning of a word does not necessarily depend \emph{sequentially} on the preceeding words in that order
+		\item Solution: \textit{Learn} which tokens \emph{to attend to} (attention)
+	\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{The idea}
+	\begin{block}{BERT: Bidirectional Encoder Representations from Transformers \parencite{BERT}}
+		\begin{itemize}[<+->]
+			\item We can use BERT for a lot of different tasks: for sequence-to-sequence predictions (e.g., translation), but also for classification (yeah!)
+			\item Can be done in keras
+			\item The Huggingface transformers library includes a lot of BERT-models (e.g., BERTje for Dutch)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+
+
+\section{Your takeaway}
+
+
+\begin{frame}[standout]
+	TODO KORTE RECAP/SAMENVATTING VAN DE CURSUS
+\end{frame}
+
+
+\question{Have your plans about how to and wether to use ML changed? }
+
+
+\question{What are your next steps?}
+
+
+\begin{frame}[standout]
+Last part: we help you working on (or discussing about) your own projects.
+\end{frame}
+
+
+
+\begin{frame}[plain]
+	\printbibliography
+\end{frame}
+
+
+
+\end{document}
