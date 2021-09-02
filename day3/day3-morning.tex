@@ -55,7 +55,7 @@
 \usepackage{csquotes}
 \usepackage[style=apa, backend = biber]{biblatex}
 \DeclareLanguageMapping{american}{american-UoN}
-\addbibresource{../references.bib}
+\addbibresource{../literature.bib}
 \renewcommand*{\bibfont}{\tiny}
 
 \usepackage{tikz}
@@ -130,7 +130,7 @@ minimum height=2em, text width=4em, text centered,]
 
 
 
-\section[Recap]{Recap: Types of Automated Content Analysis}
+\section[Automated Content Analysis]{Types of Automated Content Analysis}
 \begin{frame}{}
 Recap: Types of Automated Content Analysis
 \end{frame}
@@ -145,12 +145,11 @@ Recap: Types of Automated Content Analysis
 %}
 
 
-section[Recap]{Recap: Top-down vs bottom-up}
 
 
 \begin{frame}[plain]
 \makebox[\linewidth]{
-	\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{boumanstrilling2016}}
+	\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{../pictures/boumanstrilling2016}}
 \cite{Boumans2016}
 \pause
 
@@ -175,7 +174,7 @@ section[Recap]{Recap: Top-down vs bottom-up}
 
 \begin{block}<3->{Unsupervised machine learning}
 	You have no labels. \onslide<4>{(\footnotesize{You did not measure \texttt{y})}}\\
-	\onslide<5>{\textbf{Again, you already know some techniques to find out how \texttt{x1}, \texttt{x2},\ldots \texttt{x\_i} co-occur from other courses:} \begin{itemize}
+	\onslide<5>{\textbf{You might already be familiar with some techniques to figure out whether \texttt{x1}, \texttt{x2},\ldots \texttt{x\_i} co-occur} \begin{itemize}
 			\item Principal Component Analysis (PCA) and Singular Value Decomposition (SVD)
 			\item Cluster analysis
 			\item Topic modelling (Non-negative matrix factorization and Latent Dirichlet Allocation)
@@ -379,7 +378,7 @@ vec = CountVectorizer(max_df=0.5, min_df=5)
 
 \begin{frame}[fragile]{Dimensionality reduction}
 
-So, we can use unsuvised ML as a dimension reduction step in a supervised ML pipeline. 
+So, we can use unsupervised ML as a dimension reduction step in a supervised ML pipeline. 
 \vspace{0.5cm}
 But it can also be a goal in itself, to understand the data better or to visualize them.
 \end{frame}
@@ -479,7 +478,7 @@ r = mypipe.fit_transform(texts)
 
 
 \footnotesize{
-* It's mathematically different, but you can SVD is even used ``under the hood'' by several PCA modules to solve PCA problems.
+* It's mathematically different, but SVD is even used ``under the hood'' by several PCA modules to solve PCA problems.
 
 More info and background: \url{https://towardsdatascience.com/pca-and-svd-explained-with-numpy-5d13b0d2a4d8}}
 
@@ -615,10 +614,10 @@ terms = vec.get_feature_names()
 print("Top terms per cluster:")
 
 for i in range(k):
-print("Cluster {}: ".format(i), end='')
+    print("Cluster {}: ".format(i), end='')
 for ind in order_centroids[i, :10]:
-print("{} ".format(terms[ind]), end='')
-print()
+    print("{} ".format(terms[ind]), end='')
+    print()
 \end{lstlisting}
 \pause
 returns something like:
