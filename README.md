@@ -45,7 +45,16 @@ The course will provide insights into the concepts, challenges and opportunities
 
 * [Wednesday](day3/): **Unsupervised Machine learning**
 
+    - Clustering features: e.g., PCA
+    - Clustering cases: e.g., K-means clustering, LDA
+    - Exercise: Practice with different unsupervised machine learning algorithms
+
 * [Thursday](day4/): **Supervised Machine Learning**
+
+    - Basics of supervised machine Learning
+      - Evaluation metrics
+      - Different type of classifiers (e.g., Naive Bayes, SVM, ..)
+    - Optimizing supervised learning, in light of concepts such as overfitting, regularization, cross-validation and hyper-parameter tuning
 
 * [Friday](day5/): **Advances in Machine Learning**
     - Word embeddings
