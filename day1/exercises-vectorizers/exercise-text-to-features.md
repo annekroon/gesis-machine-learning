@@ -5,6 +5,8 @@
 - Download `articles.tar.gz` from
 https://dx.doi.org/10.7910/DVN/ULHLCB
 
+If you experience difficulties downloading this (rather large) dataset, you can also download just a part of the data [here](https://surfdrive.surf.nl/files/index.php/s/Ljocav9NzmQbh04)
+
 - Unpack it. On Linux and MacOS, you can do this with `tar -xzf mydata.tar.gz` on the command line. On Windows, you may need an additional tool such as `7zip` for that (note that technically speaking, there is a `tar` archive within a `gz` archive, so unpacking may take *two* steps depending on your tool).
 
 
@@ -36,7 +38,7 @@ infowarsarticles = []
 for filename in infowarsfiles:
     with open(filename) as f:
 	    infowarsarticles.append(f.read())
-      
+
 ```
 
 - Can you explain what the `glob` function does?
