@@ -118,7 +118,7 @@
 	\end{frame}
 
 
-\begin{section}{Advanced NLP}
+\section{Advanced NLP}
 	
 	\begin{frame}{Process and/or enrich}
 	\begin{block}{Advanced NLP}
@@ -189,7 +189,7 @@ Python:
 \begin{lstlisting}
 import spacy
 nlp = spacy.load('nl')
-doc = nlp('Een 38-jarige vrouw uit Zeist en twee mannen moeten 24 maanden de cel in voor de gecoördineerde oplichting van Rabobank-klanten.')
+doc = nlp('Een 38-jarige vrouw uit Zeist en twee mannen moeten 24 maanden de cel in voor de gecoordineerde oplichting van Rabobank-klanten.')
 for ent in doc.ents:
     print(ent.text,ent.label_)
 \end{lstlisting}
@@ -206,13 +206,12 @@ Rabobank ORG
 
 
 \begin{frame}{More NLP}
- \url{http://nlp.stanford.edu}
+\url{http://nlp.stanford.edu}
 \url{http://spacy.io}
 \url{http://nltk.org}
 \url{https://www.clips.uantwerpen.be/pattern}
 \end{frame}
 
-\end{frame}
 
 
 \begin{frame}{Main takeaway}
@@ -349,20 +348,20 @@ count2_list=[]
 filename_list = glob("/home/damian/articles/*.txt")
 
 for fn in filename_list:
-with open(fn) as fi:
-artikel = fi.read()
-artikel = artikel.replace('\n',' ')
+    with open(fn) as fi:
+        artikel = fi.read()
+        artikel = artikel.replace('\n',' ')
 
-count1 = len(re.findall('Israel.*(minister|politician.*|[Aa]uthorit)',artikel))
-count2 = len(re.findall('[Pp]alest',artikel))
+    count1 = len(re.findall('Israel.*(minister|politician.*|[Aa]uthorit)',artikel))
+    count2 = len(re.findall('[Pp]alest',artikel))
 
-count1_list.append(count1)
-count2_list.append(count2)
+    count1_list.append(count1)
+    count2_list.append(count2)
 
 output=zip(filename_list,count1_list, count2_list)
 with open("results.csv", mode='w',encoding="utf-8") as fo:
-writer = csv.writer(fo)
-writer.writerows(output)
+    writer = csv.writer(fo)
+    writer.writerows(output)
 \end{lstlisting}
 \end{frame}
 
@@ -371,13 +370,13 @@ writer.writerows(output)
 
 \begin{frame}[fragile]{Example 2: Which number has this Lexis Nexis article?}
 \begin{lstlisting}
-All Rights Reserved
+                        All Rights Reserved
 
-2 of 200 DOCUMENTS
+                  2 of 200 DOCUMENTS
 
-De Telegraaf
+            De Telegraaf
 
-21 maart 2014 vrijdag
+         21 maart 2014 vrijdag
 
 Brussel bereikt akkoord  aanpak probleembanken;
 ECB krijgt meer in melk te brokkelen
@@ -393,13 +392,13 @@ over een saneringsfonds voor banken. Daarmee staat de laatste
 
 \begin{frame}[fragile]{Example 2: Check the number of a lexis nexis article}
 \begin{lstlisting}
-All Rights Reserved
+                        All Rights Reserved
 
-2 of 200 DOCUMENTS
+                  2 of 200 DOCUMENTS
 
-De Telegraaf
+            De Telegraaf
 
-21 maart 2014 vrijdag
+       21 maart 2014 vrijdag
 
 Brussel bereikt akkoord  aanpak probleembanken;
 ECB krijgt meer in melk te brokkelen
@@ -432,9 +431,6 @@ Write a script that
 
 More tips:
 \huge{\url{http://www.pyregex.com/}}
-\end{frame}
-
-
 \end{frame}
 
 
