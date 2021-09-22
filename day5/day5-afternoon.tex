@@ -155,6 +155,28 @@ TODO IETS TOEVOEGEN OVER BERT EN TRANSFORMERS EN ZO
 
 
 
+\subsection{Do I need all this fancy stuff?}
+
+\begin{frame}{Things to consider}
+  How important is\ldots
+  \begin{itemize}[<+->]
+  \item precision/recall? Am I satisfied with .88 when .90 is theoretically possible? .85? .80? .75?
+  \item explainability?
+  \item computational ressources?
+  \item generalizability and out-of-sample performance?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Do I need all this fancy stuff?}
+  \begin{itemize}[<+->]
+  \item Always estimate a simple baseline model first
+  \item Invest in good hyperparameter-tuning (cross-validation, gridsearch) and don't forget to set aside unseen data for the \emph{final} evaluation.
+  \item If you (a) need to get the highest possible accuracy, or (b) have reasons to assume that the model does not generalize well enough (overfitting problems, bad out-of-sample prediction (e.g., training topics on newspaper 1, predicting topics in newspaper 2)), try embedding-based approaches, transformers, etc.
+  \item Rule of thumb: the more abstract/latent what you want to predict, the less likely classic ML is going to work
+   \end{itemize}
+\end{frame}
+
+
 \section{Your takeaway}
 
 
