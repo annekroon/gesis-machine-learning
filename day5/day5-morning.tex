@@ -103,7 +103,7 @@
 
 
 
-\title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 5 -- Thursday \\ »Next steps«}
+\title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 5 -- Friday \\ »Next steps«}
 \author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
 \date{September 30, 2021}
 \institute[Gesis]{Gesis}
@@ -116,8 +116,13 @@
 	\titlepage
 \end{frame}
 
-\begin{frame}{This part: The idea behind word embeddings}
+\begin{frame}{Today: Beyond BOW}
 	\tableofcontents
+\end{frame}
+
+
+\begin{frame}[standout]
+Today, we want to look into techniques that go beyond using word frequencies as features. We will talk about Word Embeddings, Neural Networks, and Transformers. 
 \end{frame}
 
 
@@ -627,17 +632,17 @@
 
 
 \begin{frame}[fragile]{Simple feed forward network}
-	\begin{lstlisting}
-	model.add(Dense(300, input_dim=input_dim, activation='relu'))
-	model.add(Dense(1, activation='sigmoid'))
-	\end{lstlisting}	
-	
-	\begin{itemize}[<+->]
-		\item Our first layer reduces the input features (e.g., the 10,000 features our CountVectorizer creates) to 300 neurons
-		\item It does so using the relu function $f(x) = max(0, x)$ (as our counts cannot be negartive, just a linear function)
-		\item The second layer reduces the 300 neurons to 1 output neuron using the sigmoid function (the S curve you know fron logistic regression)
-		\item Of course, we can add multiple layers in between if we want to
-	\end{itemize}
+\begin{lstlisting}
+model.add(Dense(300, input_dim=input_dim, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+\end{lstlisting}	
+
+\begin{itemize}[<+->]
+	\item Our first layer reduces the input features (e.g., the 10,000 features our CountVectorizer creates) to 300 neurons
+	\item It does so using the relu function $f(x) = max(0, x)$ (as our counts cannot be negartive, just a linear function)
+	\item The second layer reduces the 300 neurons to 1 output neuron using the sigmoid function (the S curve you know fron logistic regression)
+	\item Of course, we can add multiple layers in between if we want to
+\end{itemize}
 \end{frame}
 
 
@@ -667,22 +672,22 @@
 
 
 \begin{frame}[fragile]{Convolutional networks}
-	\begin{lstlisting}
-	model.add(Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen))
-	model.add(Conv1D(embedding_dim, 5, activation='relu'))
-	model.add(GlobalMaxPooling1D())
-	model.add(Dense(300, activation='relu'))
-	model.add(Dense(1, activation='sigmoid'))
-	
-	\end{lstlisting}	
-	The layers:	
-	\begin{enumerate}[<+->]
-		\item train an embedding model
-		\item apply the convolution with 5 ``timestamps''
-		\item pool using the maximum
-		\item another layer with 300 dimensions
-		\item the final layer with 1 output neuron
-	\end{enumerate}
+\begin{lstlisting}
+model.add(Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen))
+model.add(Conv1D(embedding_dim, 5, activation='relu'))
+model.add(GlobalMaxPooling1D())
+model.add(Dense(300, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+
+\end{lstlisting}	
+The layers:	
+\begin{enumerate}[<+->]
+	\item train an embedding model
+	\item apply the convolution with 5 ``timestamps''
+	\item pool using the maximum
+	\item another layer with 300 dimensions
+	\item the final layer with 1 output neuron
+\end{enumerate}
 \end{frame}
 
 
@@ -721,7 +726,11 @@
 \end{frame}
 
 
+\section{Exercise}
 
+\begin{frame}[standout]
+Let's look together at imdb.ipynb and then try to do this with another dataset from one of the previous days!
+\end{frame}
 
 
 
