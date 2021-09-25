@@ -4,9 +4,9 @@
 Let’s take some time to write some regular expressions. Write a
 script that
 
-• extracts URLS form a list of strings
+• extracts URLS form a list of strings  
 • removes everything that is not a letter or number from a list of
-strings
+strings  
 
 
 ```python

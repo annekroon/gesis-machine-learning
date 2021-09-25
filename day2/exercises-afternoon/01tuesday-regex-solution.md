@@ -13,13 +13,12 @@ for l in list_w_urls:
 
 ```
 
-`?` = matches either once or zero times
-`?:` = matches the group but does not captured it / save it.
-`\w` = matches a "word" character: a letter or digit or underbar [a-zA-Z0-9_].
+`?` = matches either once or zero times  
+`?:` = matches the group but does not captured it / save it.  
+`\w` = matches a "word" character: a letter or digit or underbar [a-zA-Z0-9_].  
 
 
-## remove everything that is not a letter or number from a list of
-strings
+## remove everything that is not a letter or number from a list of strings
 
 ```python
 for e in list_w_urls:
