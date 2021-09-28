@@ -11,6 +11,8 @@
 \usepackage{etoolbox}
 \usepackage[utf8]{inputenc}
 
+\usepackage{pifont}
+
 \usepackage{threeparttable}
 \usepackage{subcaption}
 
@@ -754,16 +756,15 @@ To reduce the number of features, but also to have \emph{meaningful} features (d
 1. Go to \url{https://figshare.com/articles/News-Processed-Dataset/5296357} and download \texttt{WSJ\_20170607\_to\_20170726\_10AmTo4Pm.json} (the small file of 9 MB)
 
 
-2. You can read the file as follows:
+2. You can read the file as follows:\footnote{It's a json-lines file with one json object per line (see slides yesterday), and we only need what's withinthe \texttt{['content']} key, the rest is some metadata -- try out what happens if you leave away the \texttt{['content']}}
 
 \begin{lstlisting}
 import json
-data = []
-with   open('/home/damian/Downloads/WSJ_20170607_to_20170726_10AmTo4Pm.json') as f:
-  for line in f:
-    data.append(json.loads(line))
-    texts = [e['content'] for e in data]
+with open('WSJ_20170607_to_20170726_10AmTo4Pm.json') as f:
+        texts = [json.loads(line)['content'] for line in f]
 \end{lstlisting}
+
+
 
 
 3. Use unsupervised machine learning techniques (and/or other techniques) to draw inferences about topics of (groups of) texts!
