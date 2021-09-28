@@ -12,11 +12,11 @@ You can use the code you've written yesterday as a starting point. Again, try yo
 - Perform some first analyses on the data using string methods and regular expressions.
 Techniques you can try out include:
 
-a.  lowercasing
-b.  tokenization
-c.  stopword removal
-d.  stemming and/or lemmatizing)
-e.  cleaning: removing punctuation, line breaks, double spaces
+a.  lowercasing  
+b.  tokenization  
+c.  stopword removal  
+d.  stemming and/or lemmatizing)  
+e.  cleaning: removing punctuation, line breaks, double spaces  
 
 Note that if you want to tokenize and stem your data using `spacy`, you need to install `spacy` and the language model. Run the following in the your terminal environment:
 
