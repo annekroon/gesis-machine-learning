@@ -25,5 +25,5 @@ for e in list_w_urls:
     print(re.sub(r'[\W_]+', ' ', e))
 ```
 
-`[\W_]` = matches any non-word character (or underscore, which is weirdly enough considered a 'word character' - therefore, if we simply do `\W`, we miss the underscores)
+`[\W_]` = matches any non-word character (or underscore, which is weirdly enough considered a 'word character' - therefore, if we simply do `\W`, we miss the underscores)  
 `+` = 1 or more times  
