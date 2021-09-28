@@ -22,5 +22,9 @@ for l in list_w_urls:
 
 ```python
 for e in list_w_urls:
-    print(re.sub(r'[\W_+]', '*', e))
+    print(re.sub(r'[\W_]+', ' ', e))
 ```
+
+`\W_` = matches any non-word character
+`[]` = range
+`+` = 1 or more times
