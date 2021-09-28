@@ -27,16 +27,16 @@ Hints:
 In order to read .RTF files with python, we need to convert rtf files to strings, before we can start parsing and processing.
 This library can help: https://pypi.org/project/striprtf/
 
-```
+```bash
 pip install striprtf
 ```
 
 Afterwards, we can start converting our files:
 
-```
+```python
 from striprtf.striprtf import rtf_to_text
 
-rtf_string = open("02tuesday/corona_news/news_corona_1.RTF").read()
+rtf_string = open("exercises-afternoon/corona_news/news_corona_1.RTF").read()
 text = rtf_to_text(rtf_string)
 
 ```
@@ -44,6 +44,6 @@ text = rtf_to_text(rtf_string)
 This will return a string object. In order to split up the string by article, we can look at the structure of the data.
 As you might notice, all news articles went with 'End of Document  '. We can use this information to split the string.
 
-```
+```python
 splitted_text = text.replace("\n", " ").split("End of Document  ")
 ```

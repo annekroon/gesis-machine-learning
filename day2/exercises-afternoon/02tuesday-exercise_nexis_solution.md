@@ -5,12 +5,12 @@ This is just one solution. Maybe you came up with an even better one yourself!
 
 ### Reading the files in:
 
-```
+```python
 from striprtf.striprtf import rtf_to_text
 
 # read the files in
 filenames = ["news_corona_" + str(i) + ".RTF" for i in range(1, 4) ]
-rtf_string_2  = [ open("02tuesday/corona_news/" + f).read() for f in filenames ]
+rtf_string  = [ open("exercises-afternoon/corona_news/" + f).read() for f in filenames ]
 
 # convert the files from rtf to string format
 text = [ rtf_to_text(i) for i in rtf_string ]
@@ -23,7 +23,7 @@ splitted_text = [ i.replace("\n", " ").split("End of Document  ") for i in text 
 
 ### A function that parses the documents.
 
-```
+```python
 import re
 
 def parse_nexis_uni(news_string):
@@ -66,7 +66,7 @@ def parse_nexis_uni(news_string):
 
 #### calling the function
 
-```
+```python
 results = []
 for document in splitted_text:
     results.extend(parse_nexis_uni(document))
