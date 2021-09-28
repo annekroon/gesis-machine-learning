@@ -47,6 +47,29 @@ A more sophisticated solution:
 from nltk.tokenize import TreebankWordTokenizer
 articles_tokenized = [TreebankWordTokenizer().tokenize(art) for art in articles ]
 ```
+
+Even more sophisticated; create your own tokenizer that first split into sentences. In this way,`TreebankWordTokenizer` works better.
+
+```python
+import regex
+
+nltk.download("punkt")
+class MyTokenizer:
+    def tokenize(self, text):
+        tokenizer = TreebankWordTokenizer()
+        result = []
+        word = r"\p{letter}"
+        for sent in nltk.sent_tokenize(text):
+            tokens = tokenizer.tokenize(sent)    
+            tokens = [t for t in tokens
+                      if regex.search(word, t)]
+            result += tokens
+        return result
+
+mytokenizer = MyTokenizer()
+print(mytokenizer.tokenize(articles[0]))
+```
+
 ##### c. removing stopwords
 
 Define your stopwordlist:
