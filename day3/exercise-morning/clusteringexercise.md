@@ -20,7 +20,7 @@ For inspiration, see [here](pca_svd_kmeans.ipynb).
 #### Code suggestion for getting the right number of `k`:
 
 ```python
-### Estimate 14 models to determine the best value of `k`
+### Estimate some models to determine the best value of `k`
 wss = []
 for i in range(2, 10):
     print(i)
