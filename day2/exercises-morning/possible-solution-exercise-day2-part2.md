@@ -51,8 +51,10 @@ Now lets fit a `sklearn` vectorizer on the manually crafted feature set:
 ```python
 from sklearn.feature_extraction.text import CountVectorizer
 X_train,X_test,y_train,y_test=train_test_split(documents_uniandbigrams, labels, test_size=0.3)
+# We do *not* want scikit-learn to tokenize a string into a list of tokens,
+# after all, we already *have* a list of tokens. lambda x:x is just a fancy way of saying:
+# do nothing!
 myvectorizer= CountVectorizer(analyzer=lambda x:x)
-#myvectorizer = CountVectorizer(ngram_range=(1,2))
 ```
 
 let's fit and transform
@@ -84,3 +86,15 @@ y_pred = model.predict(X_features_test)
 print(f"Accuracy : {accuracy_score(y_test, y_pred)}")
 print(classification_report(y_test, y_pred))
 ```
+
+
+### Final remark on ngrams in scikit learn
+
+Of course, you do not *have* to do all of this if you just want to use ngrams. Alternatively, you can simply use
+```
+myvectorizer = CountVectorizer(ngram_range=(1,2))
+X_features_train = myvectorizer.fit_transform(X_train)
+```
+*if X_train are the **untokenized** texts.*
+
+What this little example illustrates, though, is that you can use *any* manually crafted feature set as input for scikit-learn.
