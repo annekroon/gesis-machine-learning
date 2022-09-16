@@ -18,11 +18,11 @@ The course will provide insights into the concepts, challenges, and opportunitie
 |   |    |
 | -- | -- |
 | 10.00—12.00 |     Lecture Part I   |
-| 12:00—13.00:|   Exercises Part I   |
-| 13.00—14.00:|    Lunch break       |
-| 14.00—15.30:|    Lecture Part II   |
-| 15.30—16.30:|     Exercises Part II |
-| 16.30—17.00:|  Plenary discussion exercises / wrap up |
+| 12:00—13.00|   Exercises Part I   |
+| 13.00—14.00|    Lunch break       |
+| 14.00—15.30|    Lecture Part II   |
+| 15.30—16.30|     Exercises Part II |
+| 16.30—17.00|  Plenary discussion exercises / wrap up |
 
 
 ## Topics per day
