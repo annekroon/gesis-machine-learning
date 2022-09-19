@@ -5,7 +5,7 @@
 - Download `articles.tar.gz` from
 https://dx.doi.org/10.7910/DVN/ULHLCB
 
-If you experience difficulties downloading this (rather large) dataset, you can also download just a part of the data [here](https://filesender.surf.nl/download.php?files_ids=9321805) (or the `zip` version [here](https://filesender.surf.nl/download.php?files_ids=9321803))
+If you experience difficulties downloading this (rather large) dataset, you can also download just a part of the data [here](https://filesender.surf.nl/?s=download&token=a38ad3d6-4fc4-4722-bb3a-00ded0f5563a)
 
 - Unpack it. On Linux and MacOS, you can do this with `tar -xzf mydata.tar.gz` on the command line. On Windows, you may need an additional tool such as `7zip` for that (note that technically speaking, there is a `tar` archive within a `gz` archive, so unpacking may take *two* steps depending on your tool).
 
