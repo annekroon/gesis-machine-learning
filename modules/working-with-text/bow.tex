@@ -1,0 +1,331 @@
+
+
+\subsection{A cleaner BOW representation}
+
+\begin{frame}{Room for improvement}
+\begin{description}
+	\item[tokenization] How do we (best) split a sentence into tokens (terms, words)?
+	\item[pruning] How can we remove unneccessary words?
+	\item[lemmatization] How can we make sure that slight variations of the same word are not counted differently?
+
+\end{description}
+\end{frame}
+
+\subsubsection{Better tokenization}
+
+\begin{frame}[fragile]{OK, good enough, perfect?}
+\begin{block}{.split()}
+\begin{itemize}
+	\item space $\rightarrow$ new word
+	\item no further processing whatsoever
+	\item thus, only works well if we do a preprocessing outselves (e.g., remove punctuation)
+\end{itemize}
+\end{block}
+\begin{lstlisting}
+docs = ["This is a text",  "I haven't seen John's derring-do. Second sentence!"]
+tokens = [d.split() for d in docs]
+\end{lstlisting}
+\begin{lstlistingoutputtiny}
+[['This', 'is', 'a', 'text'], ['I', "haven't", 'seen', "John's", 'derring-do.', 'Second', 'sentence!']]
+\end{lstlistingoutputtiny}
+\end{frame}
+
+
+\begin{frame}{OK, good enough, perfect?}
+  \begin{block}{Tokenizers from the NLTK pacakge}
+    \begin{itemize}
+    \item multiple improved tokenizers that can be used instead of .split()
+    \item e.g., Treebank tokenizer:
+      \begin{itemize}
+      \item split standard contractions ("don't")
+      \item deals with punctuation
+      \item BUT: Assumes lists of \emph{sentences}.
+      \end{itemize}
+    \item Solution: Build an own (combined) tokenizer (next slide)!
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]{OK, good enough, perfect?}
+\begin{minted}{python}
+import nltk
+import regex
+
+class MyTokenizer:
+    def tokenize(self, text):
+        tokenizer = nltk.tokenize.TreebankWordTokenizer()
+        result = []
+        word = r"\p{letter}"
+        for sent in nltk.sent_tokenize(text):
+            tokens = tokenizer.tokenize(sent)    
+            tokens = [t for t in tokens 
+                      if regex.search(word, t)]
+            result += tokens
+        return result
+        
+mytokenizer = MyTokenizer()
+tokens = [mytokenizer.tokenize(d) for d in docs]
+
+\end{minted}
+
+\begin{lstlistingoutputtiny}
+[['This', 'is', 'a', 'text'], ['I', 'have', "n't", 'seen', 'John', "'s", 'derring-do', 'Second', 'sentence']]
+\end{lstlistingoutputtiny}
+\end{frame}
+
+
+
+
+
+
+
+
+
+\subsubsection{Stopword removal}
+
+
+
+\begin{frame}{Stopword removal}
+	\begin{block}{What are stopwords?}
+		\begin{itemize}
+			\item Very frequent words with little inherent meaning
+			\item \texttt{the, a, he, she, \ldots}
+			\item context-dependent: if you are interested in gender, \texttt{he} and \texttt{she} are no stopwords. 
+			\item Many existing lists as basis
+		\end{itemize}
+	\end{block}
+
+\end{frame}
+
+
+\begin{frame}{Stopword removal: What and why?}
+	\begin{block}{Why remove stopwords?}
+		\begin{itemize}
+			\item If we want to identify key terms (e.g., by means of a word count), we are not interested in them
+			\item If we want to calculate document similarity, it might be inflated
+			\item If we want to make a word co-occurance graph, irrelevant information will dominate the picture
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Stopword removal}
+	\begin{lstlisting}
+from nltk.corpus import stopwords
+mystopwords = stopwords.words("english")
+mystopwords.extend(["test", "this"])
+		
+def tokenize_clean(s, stoplist):
+    cleantokens = []
+    for w in TreebankWordTokenizer().tokenize(s):
+        if w.lower() not in stoplist:
+            cleantokens.append(w)
+	return cleantokens
+		
+tokens = [tokenize_clean(d, mystopwords) for d in docs]
+	\end{lstlisting}
+	\begin{lstlistingoutputtiny}
+[['text'], ["n't", 'seen', 'John', 'derring-do.', 'Second', 'sentence', '!']]
+	\end{lstlistingoutputtiny}
+
+\begin{alertblock}{You can do more!}
+	\tiny{For instance, in line 8, you could add an \texttt{or} statement to also exclude punctuation.}
+\end{alertblock}
+
+\end{frame}
+
+\begin{frame}[fragile]{Removing punctuation}
+	\begin{lstlisting}
+from nltk.tokenize import RegexpTokenizer
+tokenizer = RegexpTokenizer(r'\w+')
+tokenizer.tokenize("Hi all, what's up!")
+	\end{lstlisting}  
+	\begin{lstlistingoutputtiny}
+['Hi', 'all', 'what', 's', 'up']
+	\end{lstlistingoutputtiny}
+	\begin{lstlisting}
+from string import punctuation
+doc = "She said, of course i'll come to the party!!!"
+"".join([w for w in doc if w not in punctuation])
+\end{lstlisting}  
+	\begin{lstlistingoutputtiny}
+'She said of course ill come to the party'
+	\end{lstlistingoutputtiny}
+	
+\end{frame}
+
+\subsection{Stemming and lemmatization}
+
+
+\begin{frame}{NLP: What and why?}
+	\begin{block}{Why do stemming?}
+		\begin{itemize}
+			\item Because we do not want to distinguish between smoke, smoked, smoking, \ldots
+			\item Typical preprocessing step (like stopword removal)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Stemming and lemmatization}
+	\begin{itemize}
+		\item Stemming: reduce words to its stem by removing last part (drinking $\rightarrow$ drink)
+		\item Lemmatization: find word that you would need to look up in a dictionary (drinking $\rightarrow$ drink, but also went $\rightarrow$ go)
+		\item stemming is simpler than lemmatization
+		\item lemmatization often better
+	\end{itemize}
+	\pause
+	
+	Example below: tokenization and lemmatization with \texttt{spacy} in one go:
+	\begin{lstlisting}
+		import spacy
+		nlp = spacy.load('en')   # potentially you need to install the language model first
+		lemmatized_tokens = [[token.lemma_  for token in nlp(doc)] for doc in docs]
+	\end{lstlisting}
+	\begin{lstlistingoutputtiny}
+		[['this', 'be', 'a', 'text'], ['-PRON-', 'have', 'not', 'see', 'John', "'s", 'derring', '-', 'do', '.', 'second', 'sentence', '!']]
+	\end{lstlistingoutputtiny}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]{Stemming and stopword removal - let's combine them!}
+	\begin{lstlisting}
+from nltk.stem.snowball import SnowballStemmer
+from nltk.corpus import stopwords
+stemmer=SnowballStemmer("english")
+mystopwords = stopwords.words("english")
+frase="I am running while generously greeting my neighbors"
+frasenuevo=""
+for palabra in frase.lower().split():
+	if palabra not in mystopwords:
+	frasenuevo=frasenuevo + stemmer.stem(palabra)  + " "
+\end{lstlisting}
+Now, {\tt{print(frasenuevo)}} returns:
+\begin{lstlisting}
+run generous greet neighbor
+	\end{lstlisting}
+	Perfect!
+	\pause
+	\small
+	Or:
+	\begin{lstlisting}
+print(" ".join([stemmer.stem(p) for p in frase.lower().split() if p not in mystopwords]))
+	\end{lstlisting}
+	
+\end{frame}
+
+\subsection{ngrams}
+\begin{frame}
+	Instead of just looking at single words (unigrams), we can also use adjacent words (bigrams).
+\end{frame}
+
+\begin{frame}[fragile]{ngrams}
+	\begin{lstlisting}
+import nltk
+texts = ['This is the first text text text first', 'And another text yeah yeah']
+texts_bigrams = [["_".join(tup) for tup in nltk.ngrams(t.split(),2)] for t in texts]
+print(texts_bigrams)
+	\end{lstlisting}
+	\texttt{[['This\_is',
+		'is\_the',
+		'the\_first',
+		'first\_text',
+		'text\_text',
+		'text\_text',
+		'text\_first'],
+		['And\_another', 'another\_text', 'text\_yeah', 'yeah\_yeah']]
+	}
+	
+	Typically, we would combine both.
+	\pause
+	\textbf{\textcolor{red}{What do you think? Why is this useful? (and what may be drawbacks?)}}
+\end{frame}
+
+
+
+\subsection{The order of preprocessing steps}
+
+\begin{frame}{Option 1}
+\begin{block}{Preprocessing only through Vectorizer}
+``Just use CountVectorizer or Tfidfvectorizer with the appropriate options.''	
+\begin{itemize}
+	\item pro: No double work, efficient if your main goal is a sparse matrix (for ML?) anyway
+	\item con: you cannot ``see'' the preprocessed texts
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Option 2}
+	\begin{block}{Extensive preprocessing without Vectorizer}
+``Remove stopwords, punctuation etc. and store in a string with spaces''
+
+\begin{lstlisting}
+cleaneddocs = [" ".join(re.findall(r"\w\w+", d)).lower() for d in docs]
+cleaneddocswithoutstopwords = [" ".join([w for w in d.split() if w not in mystopwords]) for d in cleaneddocs]
+\end{lstlisting}
+\begin{lstlistingoutputtiny}
+['this is text', 'haven seen john derring do second sentence']
+['text', 'seen john derring second sentence']	
+\end{lstlistingoutputtiny}
+{\tiny{Yes, this list comprehension looks scary -- you can make a more elaborate for loop instead}}
+	
+\begin{itemize}
+	\item pro: you can read (and store!) the preprocessed docs
+	\item pro: even the most stupid vectorizer (or wordcloud tool) can split the resulting string later on
+	\item con: potentially double work (for you \emph{and} the computer)
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\question{How would you do it?}
+
+\begin{frame}[plain]
+Sometimes, I go for Option 2 because
+\begin{itemize}
+	\item I like to inspect a sample of the documents
+	\item I can re-use the cleaned docs irrespective of the Vectorizer
+\end{itemize}
+
+But at other times, I opt of Option 1 instead because
+\begin{itemize}
+	\item I want to systematically compare the effect of different choices in a machine learning pipeline (then I can simply vary the vectorizer instead of the data)
+	\item I want to use techniques that are geared towards little or no preprocessing (deep learning)
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{How further?}
+
+
+\begin{frame}{Main takeaway}
+
+\begin{itemize}
+	\item It matters how you transform your text into numbers (``vectorization'').
+	\item Preprocessing matters, be able to make informed choices.
+	\item Keep this in mind when we will discuss Machine Learning! It will come back throughout Part II!
+\end{itemize}
+
+\begin{itemize}
+	\item Once you vectorized your texts, you can do all kinds of calculations (random example: get the cosine similarity between two texts)
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{More NLP}
+\begin{description}
+	\item[$n$-grams] Consider using $n$-grams instead of unigrams
+	\item[collocations]  $n$grams that appear more frequently than expected
+	\item[POS-tagging] grammatical function (``part-of-speach'') of tokens
+	\item[NER] named entity recognition (persons, organizations, locations)
+\end{description}
+\end{frame}
+
+\begin{frame}{More NLP}
+I \textbf{really} recommend looking into spacy (\url{https://spacy.io}) for advanced natural language processing, such as part-of-speech-tagging and named entity recogntion.
+\end{frame}
+
+
