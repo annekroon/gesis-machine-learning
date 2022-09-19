@@ -5,7 +5,7 @@
 - Download `articles.tar.gz` from
 https://dx.doi.org/10.7910/DVN/ULHLCB
 
-If you experience difficulties downloading this (rather large) dataset, you can also download just a part of the data [here](https://surfdrive.surf.nl/files/index.php/s/Ljocav9NzmQbh04).
+If you experience difficulties downloading this (rather large) dataset, you can also download just a part of the data [here](https://filesender.surf.nl/download.php?files_ids=9321805) (or the `zip` version [here](https://filesender.surf.nl/download.php?files_ids=9321803))
 
 - Unpack it. On Linux and MacOS, you can do this with `tar -xzf mydata.tar.gz` on the command line. On Windows, you may need an additional tool such as `7zip` for that (note that technically speaking, there is a `tar` archive within a `gz` archive, so unpacking may take *two* steps depending on your tool).
 
@@ -67,7 +67,6 @@ To arrive at a model that will do just that, you have to transform 'text' to 'fe
 - Try out a simple supervised model. Find some inspiration [here](possible-solution-exercise-day1.md). Can you predict the `source` using linguistic variations in the articles?
 
 - Which combination of pre-processing steps + vectorizer gives the best results?
-
 
 ### BONUS: Inceasing efficiency + reusability
 The approach under (3) gets you very far.
