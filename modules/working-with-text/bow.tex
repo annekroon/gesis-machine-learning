@@ -134,25 +134,7 @@ tokens = [tokenize_clean(d, mystopwords) for d in docs]
 
 \end{frame}
 
-\begin{frame}[fragile]{Removing punctuation}
-	\begin{lstlisting}
-from nltk.tokenize import RegexpTokenizer
-tokenizer = RegexpTokenizer(r'\w+')
-tokenizer.tokenize("Hi all, what's up!")
-	\end{lstlisting}  
-	\begin{lstlistingoutputtiny}
-['Hi', 'all', 'what', 's', 'up']
-	\end{lstlistingoutputtiny}
-	\begin{lstlisting}
-from string import punctuation
-doc = "She said, of course i'll come to the party!!!"
-"".join([w for w in doc if w not in punctuation])
-\end{lstlisting}  
-	\begin{lstlistingoutputtiny}
-'She said of course ill come to the party'
-	\end{lstlistingoutputtiny}
 	
-\end{frame}
 
 \subsection{Stemming and lemmatization}
 
@@ -177,43 +159,15 @@ doc = "She said, of course i'll come to the party!!!"
 	
 	Example below: tokenization and lemmatization with \texttt{spacy} in one go:
 	\begin{lstlisting}
-		import spacy
-		nlp = spacy.load('en')   # potentially you need to install the language model first
-		lemmatized_tokens = [[token.lemma_  for token in nlp(doc)] for doc in docs]
+import spacy
+nlp = spacy.load('en')   # potentially you need to install the language model first
+lemmatized_tokens = [[token.lemma_  for token in nlp(doc)] for doc in docs]
 	\end{lstlisting}
 	\begin{lstlistingoutputtiny}
-		[['this', 'be', 'a', 'text'], ['-PRON-', 'have', 'not', 'see', 'John', "'s", 'derring', '-', 'do', '.', 'second', 'sentence', '!']]
+[['this', 'be', 'a', 'text'], ['-PRON-', 'have', 'not', 'see', 'John', "'s", 'derring', '-', 'do', '.', 'second', 'sentence', '!']]
 	\end{lstlistingoutputtiny}
 \end{frame}
 
-
-
-
-\begin{frame}[fragile]{Stemming and stopword removal - let's combine them!}
-	\begin{lstlisting}
-from nltk.stem.snowball import SnowballStemmer
-from nltk.corpus import stopwords
-stemmer=SnowballStemmer("english")
-mystopwords = stopwords.words("english")
-frase="I am running while generously greeting my neighbors"
-frasenuevo=""
-for palabra in frase.lower().split():
-	if palabra not in mystopwords:
-	frasenuevo=frasenuevo + stemmer.stem(palabra)  + " "
-\end{lstlisting}
-Now, {\tt{print(frasenuevo)}} returns:
-\begin{lstlisting}
-run generous greet neighbor
-	\end{lstlisting}
-	Perfect!
-	\pause
-	\small
-	Or:
-	\begin{lstlisting}
-print(" ".join([stemmer.stem(p) for p in frase.lower().split() if p not in mystopwords]))
-	\end{lstlisting}
-	
-\end{frame}
 
 \subsection{ngrams}
 \begin{frame}
@@ -305,7 +259,7 @@ But at other times, I opt of Option 1 instead because
 \begin{itemize}
 	\item It matters how you transform your text into numbers (``vectorization'').
 	\item Preprocessing matters, be able to make informed choices.
-	\item Keep this in mind when we will discuss Machine Learning! It will come back throughout Part II!
+	\item Keep this in mind when we will discuss Machine Learning!
 \end{itemize}
 
 \begin{itemize}

@@ -1,7 +1,7 @@
 # Exercise 2: NLP and feature engineering
 ----
 
-In this exercise, we will use the same dataset as [yesterday's exercise ](../../day1/exercises/exercise-text-to-features.md). Today, we will use this data for analysis and feature extraction using NLP. These are important components of feature engineering: moving from textual data to a feature set that can be used in a classification model.
+In this exercise, you can use one of yesterday's datasets (IMDB or the newspaper data). Today, we will use this data for analysis and feature extraction using NLP. These are important components of feature engineering: moving from textual data to a feature set that can be used in a classification model.
 
 ### 1. Read in the data
 
@@ -18,12 +18,6 @@ c.  stopword removal
 d.  stemming and/or lemmatizing)  
 e.  cleaning: removing punctuation, line breaks, double spaces  
 
-Note that if you want to tokenize and stem your data using `spacy`, you need to install `spacy` and the language model. Run the following in the your terminal environment:
-
-```bash
-pip3 install spacy
-python3 -m spacy download en_core_web_sm
-```
 
 ### 3. N-grams
 
