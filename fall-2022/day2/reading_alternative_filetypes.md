@@ -4,7 +4,7 @@
 If you want to convert `.docx`, `.pdf` or `.rtf` files to `str` objects in python, you need some additional packages.
 Please find some suggestions below (there are probably different packages that will get the job done, but these seem to work!)
 
-- for`.docx` : `docx2txt`. To install: `pip install doc2text`
+- for`.docx` : `docx2txt`. To install: `pip install doc2txt`
 - for `.pdf` : `pdfminer`: To install: `pip install pdfminer`
 - for `.RTF` : `striprtf` : To install: `pip install striprtf`
 
