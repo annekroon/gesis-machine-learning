@@ -8,3 +8,5 @@ Today, we continue where we left off yesterday: how to work with textual data. M
 Link to the github page about github: https://github.com/vanatteveldt/github-workshop
 
 Link to more of such general researches: http://ccs.amsterdam/resources/essential-and-some-nice-to-have-ccs-skills/
+
+Link to interesting Spacy resource: https://ner.pythonhumanities.com/intro.html
