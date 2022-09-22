@@ -1,9 +1,11 @@
-# Exercise SML
+# Exercise SML -- Morning day 4
 
+### Option 1: practice with the ImDB data
 
-1. Reproduce examples from the book for SML on the IMDB data (11.2, 11.3, 11.4) (check [codefrombook.py](codefrombook.py) if you do not want to type over the code)
-2. Play around with different options! Can you tweak the models and make them even better? Take a look back at the [slides](../../day1/day1-afternoon.pdf) where we compared different vectorizers as well!
+* Reproduce examples from the book for SML on the IMDB data (11.2, 11.3, 11.4) (check [codefrombook.py](codefrombook.py) if you do not want to type over the code)
+* Play around with different options! Can you tweak the models and make them even better? Take a look back at the [slides](../../day1/day1-afternoon.pdf) where we compared different vectorizers as well!
 
+### Option 2: practice with the data from [Vermeer](/data-vermeer/)
 
-Additional optional exercise:
-3. Download the file `train.csv` and `test.csv` from Ilias (Data from Vermeer et al., 2020) and train a classifier on them as well.
+* Work with the file `train.csv` and `test.csv` in the folder [`data-vermeer`](/data-vermeer/) and train a classifier using this data.
+* If you feel lost, you can use the following notebook for inspiration: [`potential-solution-exercise-vermeer.ipynb`](potential-solution-exercise-vermeer.ipynb) 
