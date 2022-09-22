@@ -76,7 +76,7 @@ print(metrics.classification_report(y_test, y_pred))
 
 
 
- def short_classification_report (y_test, y_pred):
+def short_classification_report (y_test, y_pred):
     print("                \t precision \t recall")
     print(f"positive reviews:\t {metrics.precision_score(y_test,y_pred, pos_label='pos'):0.2f} \t\t {metrics.recall_score(y_test,y_pred, pos_label='pos'):0.2f}")
     print(f"negative reviews:\t {metrics.precision_score(y_test,y_pred, pos_label='neg'):0.2f} \t\t {metrics.recall_score(y_test,y_pred, pos_label='neg'):0.2f}")
