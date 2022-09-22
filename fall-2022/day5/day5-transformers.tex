@@ -163,7 +163,7 @@
 	\begin{itemize}
 		\item A more realistic view: words are continous vectors in an N dimensional space
 		\item Their representation contains real numbers, and they can occupy a position in the N dimensionality space
-		\item This way of \emph{embedding} tokens is refered to as \emph{continous} or \emp{distributed} vectors, representations or \emph{word embeddings}
+		\item This way of \emph{embedding} tokens is refered to as \emph{continous} or \emph{distributed} vectors, representations or \emph{word embeddings}
 		\item The dimensions encode meaning (implicit)
 		\end{itemize}
 \end{frame}
@@ -287,9 +287,7 @@ Language modelling refers to a set of techniques that aim determine the probabil
 		\item Thus, our supervised model will be able to deal with synonyms and related words!
 	\end{itemize}
 	
-	\pause 
-	Let's look at an example for using supervised sentiment analysis (i.e., what we did with IMDB-data before).
-	
+
 	
 \end{frame}
 
@@ -518,7 +516,7 @@ model.add(Dense(1, activation='sigmoid'))
 		\item Word2Vec and Glove produce \emph{static} vectors: each word is represented by a single vector.
 		\begin{itemize}	
 \item e.g., the vector for \emph{date} is always the same...
-\item ...however, the \emp{meaning} of this word differs across domains: ``she put a \emph{date} in his lunchbox'' (1); ``they went on a \emph{date}'' (2); and ``what's the \emph{date} today?"
+\item ...however, the \emph{meaning} of this word differs across domains: ``she put a \emph{date} in his lunchbox'' (1); ``they went on a \emph{date}'' (2); and ``what's the \emph{date} today?"
 		\end{itemize}
 	\end{itemize}
 \end{alertblock}
@@ -587,7 +585,7 @@ model.add(Dense(1, activation='sigmoid'))
 \end{frame}
 
 \begin{frame}[standout]
-	Let's look at an example (imdb.ipynb)
+	Let's look at an example (exercises/transformers-custom-dataset.ipynb)
 \end{frame}
 
 \subsection{Do I need all this fancy stuff?}
