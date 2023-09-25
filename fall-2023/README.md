@@ -1,6 +1,6 @@
 # gesis-machine-learning
 
-This repository contains study materials belonging to the course "[Introduction to Machine Learning for Text Analysis with Python](https://training.gesis.org/?site=pDetails&pID=0x1ED0D6BBCDA34A5B931409B7FCF74383), 25.09 - 29.09.2022) by Damian Trilling and Anne Kroon.
+This repository contains study materials belonging to the course "[Introduction to Machine Learning for Text Analysis with Python](https://training.gesis.org/?site=pDetails&child=full&pID=0x4693CE99CF9F4C0FB26F47EA79E611BA&subID=0xCCF089463A984E93A172700D57DA845F), 25.09 - 29.09.2023) by Damian Trilling and Anne Kroon.
 
 ------
 
@@ -14,6 +14,7 @@ The course will provide insights into the concepts, challenges, and opportunitie
 # Schedule
 
 ## General schedule
+(subset to change due to participants needs)
 
 |   |    |
 | -- | -- |
@@ -26,6 +27,7 @@ The course will provide insights into the concepts, challenges, and opportunitie
 
 
 ## Topics per day
+(subject to adjustments due to participants needs)
 
 * [Monday](day1/): **From text to features**
     - Introduction
