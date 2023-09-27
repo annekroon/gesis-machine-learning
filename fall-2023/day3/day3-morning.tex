@@ -439,10 +439,11 @@ texts = autotexts[:20] + religiontexts[:20]
 PCA does not accept a \textit{sparse matrix} as input (but the CountVectorizer gives one as output), so we need to transform it into a \textit{dense matrix}.
 
 \begin{lstlisting}
-myvec = CountVectorizer(texts, max_df=.5, min_df=5)
+myvec = CountVectorizer(max_df=.5, min_df=5)
 mypca = PCA(n_components=2)
 
-mypipe = make_pipeline(myvec, FunctionTransformer(lambda x: x.todense(), accept_sparse=True), mypca)
+mypipe = make_pipeline(myvec, FunctionTransformer(lambda x: 
+np.asarray(x.todense()), accept_sparse=True), mypca)
 
 r = mypipe.fit_transform(texts)
 \end{lstlisting}
