@@ -7,5 +7,5 @@
 
 ### Option 2: practice with the data from [Vermeer](/data-vermeer/)
 
-* Work with the file `train.csv` and `test.csv` in the folder [`data-vermeer`](/data-vermeer/) and train a classifier using this data.
+* Work with the file `train.csv` and `test.csv` in the folder [`data-vermeer`](data-vermeer/) and train a classifier using this data.
 * If you feel lost, you can use the following notebook for inspiration: [`potential-solution-exercise-vermeer.ipynb`](potential-solution-exercise-vermeer.ipynb) 
