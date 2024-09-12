@@ -10,7 +10,7 @@ from striprtf.striprtf import rtf_to_text
 
 # read the files in
 filenames = ["news_corona_" + str(i) + ".RTF" for i in range(1, 4) ]
-rtf_string  = [ open("exercises-afternoon/corona_news/" + f).read() for f in filenames ]
+rtf_string  = [ open("corona_news/" + f).read() for f in filenames ]
 
 # convert the files from rtf to string format
 text = [ rtf_to_text(i) for i in rtf_string ]
@@ -70,4 +70,12 @@ def parse_nexis_uni(news_string):
 results = []
 for document in splitted_text:
     results.extend(parse_nexis_uni(document))
+```
+
+#### write to a json file
+```python
+import json
+
+with open('corona_news/news_corona.json', 'w') as json_file:
+    json.dump(results, json_file)
 ```
