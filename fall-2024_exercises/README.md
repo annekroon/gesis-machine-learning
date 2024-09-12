@@ -1,12 +1,12 @@
 # gesis-machine-learning
 
-This repository contains study materials belonging to the course "[Introduction to Machine Learning for Text Analysis with Python](https://training.gesis.org/?site=pDetails&child=full&pID=0x4693CE99CF9F4C0FB26F47EA79E611BA&subID=0xCCF089463A984E93A172700D57DA845F), 25.09 - 29.09.2023) by Damian Trilling and Anne Kroon.
+This repository contains study materials belonging to the course "[Introduction to Machine Learning for Text Analysis with Python](https://training.gesis.org/?site=pDetails&child=full&pID=0x6C2F9D88EDAD43D197A2F284BAA9B007&subID=0x7D2B2A59BBD545D782DBADC8D1C2FF04), 16.09 - 20.09.2023 by Rupert Kiddle and Marieke van Hoof.
 
 ------
 
 # Course description
 
-The course will provide insights into the concepts, challenges, and opportunities associated with data so large that traditional research methods (like manual content analysis) cannot be applied anymore and traditional inferential statistics start to lose their meaning. Participants are introduced to strategies and techniques for capturing and analyzing digital data in communication contexts using Python. The course offers hands-on instructions regarding the several stages of computer-aided content analysis. More, in particular, students will be familiarized with pre-processing methods, analysis strategies, and the visualization and presentation of findings. The focus will be in particular on machine learning techniques to analyze quantitative textual data, amongst which both deductive (e.g., supervised machine learning and inductive (e.g., unsupervised machine learning) approaches will be discussed.
+The course will provide insights into the concepts, challenges, and opportunities associated with data so large that traditional research methods (like manual content analysis) cannot be applied anymore and traditional inferential statistics start to lose their meaning. Participants are introduced to strategies and techniques for capturing and analyzing digital data in communication contexts using Python. The course offers hands-on instructions regarding the several stages of computer-aided content analysis. Morre precisely, you will be familiarized with pre-processing methods, analysis strategies, and the visualization and presentation of findings. The focus will be in particular on machine learning techniques to analyze quantitative textual data, amongst which both deductive (e.g., supervised machine learning) and inductive (e.g., unsupervised machine learning) approaches will be discussed.
 
 ------
 
