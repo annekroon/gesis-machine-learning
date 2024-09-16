@@ -101,8 +101,8 @@
 
 
 \title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 4 -- Thursday \\ »Supervised Machine Learning«}
-\author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
-\date{September 28, 2023}
+\author[Rupert Kiddle, Marieke van Hoof]{Rupert Kiddle \\ Marieke van Hoof \\ ~ \\ \footnotesize{r.t.kiddle@vu.nl, @rptkiddle \\ m.vanhoof@uva.nl, @marieke\_vh} \\}
+\date{September 19, 2024}
 \institute[Gesis]{Gesis}
 
 \begin{document}
@@ -117,7 +117,7 @@
 
 
 \begin{frame}[standout]
-Also re-read chapter 8.5!
+Also read chapter 8.5!
 \end{frame}
 
 \question{Everything clear from this morning?}
@@ -184,7 +184,7 @@ In short: Validation data to \emph{select} the best approach; test data to get t
 \begin{lstlisting}
 from sklearn.model_selection import cross_val_score
 from sklearn.naive_bayes import MultinomialNB
-nb = MultinomialNB()     # the classifier we trained last week
+nb = MultinomialNB()     # the classifier we trained this week
 scores = cross_val_score(nb,  train_features, [r[1] for r in reviews], cv=10)
 print(scores)
 \end{lstlisting}
@@ -195,7 +195,7 @@ results in:
 [0.858  0.8612 0.8516 0.8528 0.8672 0.8664 0.8576 0.8652 0.8436 0.852 ]
 \end{lstlisting}
 
-We estimate the model 10 times on different trainig/validation data splits and get 10 different evaluation scores (here: accuracy, but we can use precision, recall, F1, etc. -- see examples in the book).
+We estimate the model 10 times on different training/validation data splits and get 10 different evaluation scores (here: accuracy, but we can use precision, recall, F1, etc. -- see examples in the book).
 
 Note that a simple 50:50 train/validation split is identical to setting $k=2$ 
 
@@ -208,7 +208,7 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 \begin{frame}{Reasons to do Cross-validation}
 	\begin{block}{We can get confidence intervals around the scores}
 		\begin{itemize}
-			\item If we have 10 scores instead of one, we can not only get the mean, but also a standarddeviation
+			\item If we have 10 scores instead of one, we can not only get the mean, but also a standard deviation
 			\item If you have two models, both with a mean accuracy (or F1, or whatever) of .85 but one with a large and one with a low standard deviation, you probably prefer the latter -- it generalizes better, less likely to suffer from overfitting
 		\end{itemize}	
 	\end{block}
@@ -225,7 +225,7 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 		\begin{itemize}
 			\item If $k=10$ (the most typical value), in each iteration, we use 90\% of the data for training.
 			\item We even use \emph{all} data (except test set, of course) for training at least once.
-			\item With train/validation split, we probably need a larger validation set to be sure (e.g., 80/30)
+			\item With train/validation split, we probably need a larger validation set to be sure (e.g., 80/20)
 			\item Especially relevant when annotation is expensive.
 		\end{itemize}
 	\end{block}
@@ -257,13 +257,15 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 
 \begin{block}{$k$-fold crossvalidation}
 	\begin{itemize}
-		\item Best option for comparing multiple models, \emph{especially} when engaging in \emph{hyperaparameter tuning} (next section)
+		\item Best option for comparing multiple models, \emph{especially} when engaging in \emph{hyperparameter tuning} (next section)
 	\end{itemize}
 \end{block}
 
-\pause
+\framebreak
+
+
 \begin{alertblock}{Also a nice example for changing standards in the field}
-A couple of years ago, you could get away with just doing a train/test split in your paper. Nowadays, chances are high a reviewer will reject this (if you try to publish your Master's thesis, for instance).
+A couple of years ago, you could get away with just doing a train/test split in your paper. Nowadays, chances are high a reviewer will reject this.
 \end{alertblock}
 
 
@@ -368,7 +370,7 @@ If $\lambda$ is larger, we punish more.
 \begin{frame}{The regularization parameter $\lambda$ (or $C = .5n\lambda$)}
 \begin{itemize}[<+->]
 	\item scikit-learn uses regularization by default
-	\item (that's why the coefficients of a logistic regression classifier will differ from a ``tradtional'' logistic regression with the statsmodels module)
+	\item (that's why the coefficients of a logistic regression classifier will differ from a ``traditional'' logistic regression with the statsmodels module)
 	\item Remember that we are \textit{not} interested in a substantive interpretation of the  $\beta$-coefficients but in a good prediction (which is why ``punishing'' large coefficients and hence biasing the coeffients is not a problem at all!)
 	\item The penalty will shrink the coefficients towards zero, \emph{which is very useful to avoid overfitting!}
 	\item As always, there is a lot of extra info on the scikit-learn website
@@ -449,7 +451,7 @@ This means that \emph{any} parameter that the classifier or vectorizer takes can
 
 
 \begin{frame}{The pipeline notation in scikit learn}
-You might have notived the Pipeline construct in the last example.
+You might have noticed the Pipeline construct in the last example.
 	\begin{itemize}
 		\item Machine learning involves multiple steps (e.g., preprocessing $\rightarrow$ vectorizer $\rightarrow$ classification)
 		\item We did all of them seperately before
@@ -488,7 +490,7 @@ predictions = pipe.predict([r[0] for r in test])
 \begin{itemize}[<+->]
 	\item When you want to systematically test what happens when you vary a hyperparameter, use grid-search to automatically do so and select the best value
 	\item sometimes already implemented (e.g., \texttt{LogisticRegressionCV} as direct replacement for \texttt{LogisticRegression})
-	\item But \texttt{GridSearchCV} is very flexible: can be used in combination with pipeline (wait a minute\ldots) for very different purposes
+	\item But \texttt{GridSearchCV} is very flexible: can be used in combination with pipeline for very different purposes
 \end{itemize}
 
 
@@ -568,7 +570,8 @@ Your classifier probably works better if you have approximately the same amount 
 	Consider constructing advanced pipelines, including a dimension reduction step: 
 	
 	
-	\url{https://scikit-learn.org/stable/tutorial/statistical\_inference/putting\_together.html}
+	%\url{https://scikit-learn.org/stable/tutorial/statistical\_inference/putting\_together.html}
+    \url{https://scikit-learn.org/stable/auto_examples/compose/plot\_digits\_pipe.html}
 \end{block}
 
 \end{frame}
@@ -581,8 +584,7 @@ Your classifier probably works better if you have approximately the same amount 
 	E.g, use BOW-features as well as features such as sentence length, number of sentences (or whatever)
 	
 	
-	\url{
-		https://scikit-learn.org/stable/auto\_examples/hetero\_feature\_union.html}
+	\url{https://scikit-learn.org/stable/auto\_examples/hetero\_feature\_union.html} or see example in repository
 \end{block}
 
 
@@ -598,20 +600,21 @@ Your classifier probably works better if you have approximately the same amount 
 
 \question{Any questions?}
 
-\begin{frame}{Exercise}
-
-	\begin{itemize}
-		\item Try it yourself! Ideally, on own data! (can also be via Google Dataset Search, Kaggle, \ldots)
-		\item But you are also free to use datasets from this morning.
-\end{itemize}
-Learning goals: 
-\begin{itemize}
-		\item Apply techniques to new datasets. 
-		\item Be able to construct the whole pipeline from ingesting via preprocessing to final prediction
-	\end{itemize}
-	
-\end{frame}
-
+%\begin{frame}{Exercise}
+%
+%	\begin{itemize}
+%		\item Try it yourself! Ideally, on own data! (can also be via Google Dataset Search, Kaggle, \ldots)
+%		\item But you are also free to use datasets from this morning.
+%\end{itemize}
+%
+%Learning goals: 
+%\begin{itemize}
+%		\item Apply techniques to new datasets. 
+%		\item Be able to construct the whole pipeline from ingesting via preprocessing to final prediction
+%	\end{itemize}
+%	
+%\end{frame}
+%
 \begin{frame}[standout]
 Let's exercise!
 \end{frame}

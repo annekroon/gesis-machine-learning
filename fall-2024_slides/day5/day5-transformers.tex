@@ -102,8 +102,8 @@
 
 
 \title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 5 -- Friday \\ »Transformers«}
-\author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
-\date{September 29, 2023}
+\author[Rupert Kiddle, Marieke van Hoof]{Rupert Kiddle \\ Marieke van Hoof \\ ~ \\ \footnotesize{r.t.kiddle@vu.nl, @rptkiddle \\ m.vanhoof@uva.nl, @marieke\_vh} \\}
+\date{September 20, 2024}
 \institute[Gesis]{Gesis}
 
 
@@ -150,7 +150,7 @@
 		\item This is a rather naïve assumption, with two main disadvantages:
 \begin{enumerate}
 	\item high dimensionality of the \emph{one-hot-encodings} of the tokens
-	\item they do not incorporate real-world knowledge
+	\item they do not incorporate real-world knowledge  
 \end{enumerate}
 	\end{itemize}
 
@@ -159,12 +159,12 @@
 \end{center}
 \end{frame}
 
-\begin{frame}{Continous vectors}
+\begin{frame}{Continuous vectors}
 	\begin{itemize}
-		\item A more realistic view: words are continous vectors in an N dimensional space
-		\item Their representation contains real numbers, and they can occupy a position in the N dimensionality space
-		\item This way of \emph{embedding} tokens is refered to as \emph{continous} or \emph{distributed} vectors, representations or \emph{word embeddings}
-		\item The dimensions encode meaning (implicit)
+		\item A more realistic view: words are continuous vectors in an N dimensional space
+		\item Their representation contains real numbers, and they can occupy a position in the N dimensional space
+		\item This way of \emph{embedding} tokens is referred to as \emph{continuous} or \emph{distributed} vectors or representations, or \emph{word embeddings}
+		\item The dimensions encode (implicit) meaning 
 		\end{itemize}
 \end{frame}
 
@@ -176,15 +176,15 @@
 
 \section{Language Modeling}
 
-\begin{frame}
-Language modelling refers to a set of techniques that aim determine the probability of a given sequence of words occurring in a sentence.
-\end{frame}
+%\begin{frame}
+%Language modelling refers to a set of techniques that aim determine the probability of a given sequence of words occurring in a sentence.
+%\end{frame}
 
 \begin{frame}{Large Language Models}
 	\begin{itemize}
+            \item Language modelling is a set of techniques that aim to determine the probability of a given sequence of words occurring in a sentence.
+            \item Large language Models: Language modelling applied to massive amounts of training data (e.g., wikipedia, news archives, Reddit, etc.)
 		\item Often referred to as `pretrained' or `foundation' models.
-		\item They rely on massive amounts of training data. 
-		\item e.g., wikipedia, news archives, Reddit, etc. 
 	\end{itemize}
 \end{frame}
 
@@ -275,14 +275,20 @@ Language modelling refers to a set of techniques that aim determine the probabil
 
 %word vectors that are able to capture the relationships between words in a surprisingly expressive way. Word embeddings are especially effective in understanding analogies, and for example understand that man is to woman as uncle to aunt, and king to king. 
 
+\question{What can we use word embeddings for?}
+
+
 \subsection[Improving down-stream classification tasks]{Using word embeddings to improve models}
 \begin{frame}[plain]
 	Using word embeddings to improve down-stream classification tasks.
 \end{frame}
 
+
+
 \begin{frame}{In supervised machine learning}
 	\begin{itemize}[<+->]
 		\item Modify CountVectorizer or TfIdfVector such that for each term, you do not only count how often it occurs, but also multiply with its embedding vector
+            \item Aggregate these embeddings (e.g., sum or mean) to represent documents with 300 instead of (for example) 10,000 dimensions
 		\item Often, pre-trained embeddings (e.g., trained on the whole wikipedia) are used
 		\item Thus, our supervised model will be able to deal with synonyms and related words!
 	\end{itemize}
@@ -291,6 +297,18 @@ Language modelling refers to a set of techniques that aim determine the probabil
 	
 \end{frame}
 
+\begin{frame}{In supervised machine learning}
+What does this mean? 
+	\begin{itemize}[<+->]
+		\item Our model is smaller
+            \item We can use words in the prediction set \textit{even if they are not in the training dataset}
+            \item We can learn from similar training samples even if they do not use the same words
+            \item But we may also loose some nuance
+	\end{itemize}
+	
+
+	
+\end{frame}
 
 
 \begin{frame}[plain]

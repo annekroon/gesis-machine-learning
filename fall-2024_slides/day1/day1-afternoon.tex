@@ -102,8 +102,8 @@
 
 
 \title[Big Data and Automated Content Analysis]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 1 - Monday  afternoon \\ »From text to features«}
-\author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
-\date{September 25, 2023}
+\author[Rupert Kiddle, Marieke van Hoof]{Rupert Kiddle \\ Marieke van Hoof \\ ~ \\ \footnotesize{r.t.kiddle@vu.nl, @rptkiddle \\ m.vanhoof@uva.nl, @marieke\_vh} \\}
+\date{September 17, 2024}
 \institute[Gesis]{Gesis}
 
 
@@ -128,7 +128,7 @@ From text to features: vectorizers
 
 \subsection{General idea}
 
-\begin{frame}[fragile]{A text as a collections of word}
+\begin{frame}[fragile]{Bag Of Words (BOW): A text as a collections of words}
 
 Let us represent a string 
 \begin{lstlisting}
@@ -157,7 +157,7 @@ Compared to the original string, this representation
 
 
 
-\begin{frame}{From vector to matrix}
+\begin{frame}{From vector to matrix: Document Term Matrix (DTM)}
 If we do this for multiple texts, we can arrange the vectors in a table.
 
 t1 = "This this is is is a test test test" \newline
@@ -180,7 +180,7 @@ t2 = "This is an example"
 \begin{itemize}[<+->]
 	\item Transforms a list of texts into a sparse (!) matrix (of word frequencies)
 	\item Vectorizer needs to be ``fitted'' to the training data (learn which words (features) exist in the dataset and assign them to columns in the matrix)
-	\item Vectorizer can then be re-used to transform other datasets 
+	\item Vectorizer can then be re-used to transform other datasets
 \end{itemize}
 \end{frame}
 
@@ -204,14 +204,13 @@ t2 = "This is an example"
 \onslide<3->{
 $\Rightarrow$ we multiply the ``term frequency'' (tf) by the inverse document frequency (idf)
 
-\tiny{(usually with some additional logarithmic transformation and normalization applied, see \url{https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfTransformer.html})}
 }
 \end{frame}
 
 \begin{frame}{tf$\cdot$idf}
 \begin{array}{ccc}
 	
-	w_{i, j}=t f_{i, j} \times \log \left(\frac{N}{d f_{i}}\right)  \\ \\
+	w_{i, j}=t f_{i, j} \times \log \left(\frac{N}{d f_{i}}\right) \\ \\
 	
 	t f_{i, j}=\text { number of occurrences of } i \text { in } j \\
 	d f_{i}=\text { number of documents containing } i \\
@@ -219,13 +218,14 @@ $\Rightarrow$ we multiply the ``term frequency'' (tf) by the inverse document fr
 \end{array}
 \end{frame}
 
+
 \begin{frame}{Is tf$\cdot$idf always better?}
 It depends.
 
 \begin{itemize}
-	\item Ultimately, it's an empirical question which works better ($\rightarrow$ machine learning)
 	\item In many scenarios,  ``discounting'' too frequent words and ``boosting'' rare words makes a lot of sense (most frequent words in a text can be highly un-informative)
 	\item Beauty of raw tf counts, though: interpretability + describes document in itself, not in relation to other documents
+ 	\item Ultimately, it's an empirical question which works better ($\rightarrow$ machine learning)
 \end{itemize}
 \end{frame}
 
@@ -236,6 +236,8 @@ It depends.
 	\item TfidfVectorizer (word counts (``term frequency'') weighted by number of documents in which the word occurs at all (``inverse document frequency''))
 \end{enumerate}
 \end{frame}
+
+
 
 \begin{frame}{Internal representations}
 \begin{block}{Sparse vs dense matrices}
@@ -327,7 +329,7 @@ Additionally remove words that occur in more than 75\% or less than $n=2$ docume
 myvectorizer = CountVectorizer(tokenizer = TreebankWordTokenizer().tokenize, stop_words=mystopwords, max_df=.75, min_df=2)
 \end{lstlisting}
 
-All togehter: tf$\cdot$idf, explicit stopword removal, pruning
+All together: tf$\cdot$idf, explicit stopword removal, pruning
 \begin{lstlisting}
 myvectorizer = TfidfVectorizer(tokenizer = TreebankWordTokenizer().tokenize, stop_words=mystopwords, max_df=.75, min_df=2)
 \end{lstlisting}

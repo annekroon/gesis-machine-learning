@@ -99,8 +99,8 @@
 
 
 \title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 4 -- Thursday \\ »Supervised Machine Learning«}
-\author[Damian Trilling, Anne Kroon]{Damian Trilling \\ Anne Kroon \\ ~ \\ \footnotesize{d.c.trilling@uva.nl, @damian0604 \\a.c.kroon@uva.nl, @annekroon} \\}
-\date{September 28, 2023}
+\author[Rupert Kiddle, Marieke van Hoof]{Rupert Kiddle \\ Marieke van Hoof \\ ~ \\ \footnotesize{r.t.kiddle@vu.nl, @rptkiddle \\ m.vanhoof@uva.nl, @marieke\_vh} \\}
+\date{September 19, 2024}
 \institute[Gesis]{Gesis}
 
 
@@ -212,12 +212,12 @@ In the machine learning world, predicting some continous value is referred to as
 
 
 \begin{frame}{Classification tasks}
-For many computational approaches, we are actually not that interested in predicting a continous value. Typical questions include:
+For many computational approaches, we are actually not that interested in predicting a continuous value. Typical questions include:
 \begin{itemize}
-	\item Is this article about topix A, B, C, D, or E?
+	\item Is this article about topic A, B, C, D, or E?
 	\item Is this review positive or negative?
 	\item Does this text contain frame F?
-	\item I this satire? 
+	\item Is this satire? 
 	\item Is this misinformation?
 	\item Given past behavior, can I predict the next click?
 \end{itemize}
@@ -277,7 +277,7 @@ For many computational approaches, we are actually not that interested in predic
 	\textcolor{red}{A = Text is about sports\\
 		B = Text contains `very', `close', `game'}.
 	\pause
-	Furthermore, we simply multiply the propabilities for the features:
+	Furthermore, we simply multiply the probabilities for the features:
 	\textcolor{red}{$$P(B) = P(very\, close\, game) = P(very) \times P(close) \times P(game)$$}
 	We can fill in all values by counting how many articles are about sports, and how often the words occur in these texts.
 	\vspace{0.3cm}
@@ -349,7 +349,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 \begin{itemize}
 	\item for \emph{linearly separable} classes not much difference
 	\item with the right hyperparameters, SVM is less sensitive to outliers
-	\item biggest advantage: with the \emph{kernel trick}, data can be transformed that they \emph{become} linearily separable
+	\item biggest advantage: with the \emph{kernel trick}, data can be transformed that they \emph{become} linearly separable
 \end{itemize}
 \end{frame}
 
@@ -377,7 +377,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 		\end{itemize}
 	\end{block}
 	\pause
-	Therfore, nowadays people use \emph{random forests}: Random forests \emph{combine} the predictions of \emph{multiple} trees
+	Therefore, nowadays people use \emph{random forests}: Random forests \emph{combine} the predictions of \emph{multiple} trees
 	$\Rightarrow$ might be a good choice for your non-linear classification problem
 \end{frame}
 
@@ -388,7 +388,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 
 \section{Supervised Machine Learning for Text Classification}
 
-\subsection{(Traditional)) non-SML approaches}
+\subsection{(Traditional) non-SML approaches}
 
 \begin{frame}{Let's consider three tasks}
 	For a given text (say, a news article, a press release, a review), determine the
@@ -400,7 +400,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 \end{frame}
 
 
-\question{What would be the strengths and weaknesses of different approaches for each of these tasks?}
+%\question{What would be the strengths and weaknesses of different approaches for each of these tasks?}
 
 
 \question{Imagine using a dictionary-based (list of keywords, list of regular expressions, or similar) approach to these tasks. How does the design (length, inclusiveness, etc.) of this list influence precision and recall?}
@@ -442,7 +442,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 	\end{itemize}
 \end{frame}
 
-\question{What do you think? Can this even work}
+\question{What do you think? Can this even work?}
 
 
 
@@ -504,7 +504,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 	\begin{itemize}
 		\item Dictionaries have low agreement with each other, and also with human coders
 		\item Even their own dictionary didn't agree
-		\item \textbf{This is not because these dictionaries are particularly bad!}. Main point: For such a complex and context-dependent task, a dictionary is just not the right tool.
+		\item \textbf{This is not because these dictionaries are particularly bad!} Main point: For such a complex and context-dependent task, a dictionary is just not the right tool.
 	\end{itemize}
 \end{frame}
 
@@ -603,7 +603,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 \subsection{An implementation}
 
 \begin{frame}[fragile]{An implementation}
-Let's say we have two list of tuples with movie reviews and their rating:
+Let's say we have two lists, with movie reviews and their rating:
 \begin{lstlisting}
 reviews_train = ["This is a great movie", "Bad movie", ... ...]
 labels_train = [1,-1, ...]  
@@ -866,7 +866,7 @@ This returns, as you would expect and hope:
 
 
 
-\section{Summing up}
+%\section{Summing up}
 
 \question{Any questions?}
 
