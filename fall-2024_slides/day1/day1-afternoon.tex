@@ -237,6 +237,14 @@ It depends.
 \end{enumerate}
 \end{frame}
 
+\begin{frame}{Vectorizers take care of...}
+\begin{enumerate}[<+->]
+	\item Tokenization: Splitting sentences into tokens (terms, words)
+        \item Vocabulary: Create a list of unique tokens in the corpus
+        \item Vectorization: For each document, assigned term frequencies or tf$\cdot$idf scores 
+\end{enumerate}
+\end{frame}
+
 
 
 \begin{frame}{Internal representations}
@@ -260,10 +268,14 @@ It depends.
 }
 
 
-\begin{frame}[standout]
-Tomorrow we discuss how we can tokenize with a list comprehension (and that's often a good idea!). But what if we want to \emph{directly} get a DTM instead of lists of tokens?
-\end{frame}
+\begin{frame}{Room for improvement?}
 
+\begin{itemize}
+    	
+    \item Tomorrow we discuss how we can tokenize with list comprehensions (and that's often a good idea!)
+        \item But if you want to directly get a DTM instead of a list of tokens you can also achieve a much cleaner representation directly with vectorizers 
+\end{itemize}
+\end{frame}
 
 \begin{frame}[fragile]{OK, good enough, perfect?}
 \begin{block}{scikit-learn's CountVectorizer (default settings)}
