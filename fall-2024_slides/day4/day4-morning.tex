@@ -125,7 +125,7 @@
 \cite{Boumans2016}
 \pause
 
-\textbf{\textcolor{orange}{The same logic applies to non-textual data!}}
+%\textbf{\textcolor{orange}{The same logic applies to non-textual data!}}
 \end{frame}
 %}
 
@@ -259,7 +259,7 @@ For many computational approaches, we are actually not that interested in predic
 	\item It is an empirical question which one works best
 	\item We typically try several ones and select the best
 	\item (remember: we have a test dataset that we did \emph{not} use to train the model, so that we can assess how well it predicts the test labels based on the test features)
-	\item To avoid $p$-hacking-like scenario's (which we call ``overfitting''), there are techniques available (cross-validation, later in this course)
+	\item To avoid $p$-hacking-like scenario's (which we call ``overfitting''), there are techniques available (e.g., cross-validation, which we address this afternoon)
 \end{itemize}
 (to make it easier, imagine a binary classfication ("positive"/"negative"), but it doesn't really matter whether there are two or more labels)
 \end{frame}
@@ -281,8 +281,8 @@ For many computational approaches, we are actually not that interested in predic
 	\textcolor{red}{$$P(B) = P(very\, close\, game) = P(very) \times P(close) \times P(game)$$}
 	We can fill in all values by counting how many articles are about sports, and how often the words occur in these texts.
 	\vspace{0.3cm}
-	\footnotesize{
-		(Fully elaborated example on \url{https://monkeylearn.com/blog/practical-explanation-naive-bayes-classifier/})}
+	%\footnotesize{
+	%	(Fully elaborated example on \url{https://monkeylearn.com/blog/practical-explanation-naive-bayes-classifier/})}
 \end{frame}
 
 \begin{frame}{Naïve Bayes}
@@ -325,7 +325,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 		\item Computationally more expensive than Naïve Bayes
 		\item We can get probabilities instead of just a label
 		\item That allows us to say how sure we are for a specific case
-		\item \ldots or to change the threshold to change our precision/recall-tradeoff
+		\item \ldots or to change the threshold to change our precision/recall-trade off (e.g., 0.7 = higher precision, lower recall)
 	\end{itemize}
 \end{frame}
 
@@ -333,7 +333,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 	\begin{columns}
 		\column{.5\linewidth}
 		\begin{itemize}
-			\item	Idea: Find a hyperplane that best seperates your cases
+			\item	Idea: Find a hyperplane that best separates your cases
 			\item Can be linear, but does not have to be (depends on the so-called kernel you choose)
 			\item Very popular 
 		\end{itemize}
@@ -342,7 +342,7 @@ $$ \frac{P(x_1 \mid label) \cdot P(x_2 \mid \rm{label})\ \cdot P(x_3 \mid label)
 		\tiny{\url{https://upload.wikimedia.org/wikipedia/commons/b/b5/Svm\_separating\_hyperplanes\_\%28SVG\%29.svg}}
 	\end{columns}
 	\vfill
-	\footnotesize{(Further reading: \url{https://monkeylearn.com/blog/introduction-to-support-vector-machines-svm/)}}
+	%\footnotesize{(Further reading: \url{https://monkeylearn.com/blog/introduction-to-support-vector-machines-svm/)}}
 \end{frame}
 
 \begin{frame}{SVM vs logistic regression}
