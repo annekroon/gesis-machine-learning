@@ -120,7 +120,7 @@
 
 \setbeamercovered{transparent}
 
-\section{One-Hot to Continous}
+\section{Word vectors}
 
 \begin{frame}{Our BOW approach until now}
 	\begin{block}{Representing a document by word frequency counts}
@@ -149,7 +149,7 @@
 		\item Words are \emph{discrete} and \emph{independent} tokens.
 		\item This is a rather naïve assumption, with two main disadvantages:
 \begin{enumerate}
-	\item high dimensionality of the \emph{one-hot-encodings} of the tokens
+	\item high dimensionality of the tokens
 	\item they do not incorporate real-world knowledge  
 \end{enumerate}
 	\end{itemize}
@@ -159,12 +159,13 @@
 \end{center}
 \end{frame}
 
-\begin{frame}{Continuous vectors}
+\begin{frame}{Word embeddings: Continuous vectors}
 	\begin{itemize}
-		\item A more realistic view: words are continuous vectors in an N dimensional space
-		\item Their representation contains real numbers, and they can occupy a position in the N dimensional space
-		\item This way of \emph{embedding} tokens is referred to as \emph{continuous} or \emph{distributed} vectors or representations, or \emph{word embeddings}
-		\item The dimensions encode (implicit) meaning 
+            \item What if we instead would represent each word by another vector representing its meaning?
+		\item Words are continuous vectors in an N dimensional space
+            \item The dimensions encode (implicit) meaning 
+            \item For, instance, `doberman' and `dog' should be represented by vectors that are close to each other in space, while `kill' and `walk' should be far from each other.
+		\item These are word embeddings!! (or \emph{continuous} or \emph{distributed} vectors or representations)
 		\end{itemize}
 \end{frame}
 
@@ -174,13 +175,13 @@
 \end{center}
 \end{frame}
 
-\section{Language Modeling}
+\subsection{Training word embeddings}
 
 %\begin{frame}
 %Language modelling refers to a set of techniques that aim determine the probability of a given sequence of words occurring in a sentence.
 %\end{frame}
 
-\begin{frame}{Large Language Models}
+\begin{frame}{Training word embeddings}
 	\begin{itemize}
             \item Language modelling is a set of techniques that aim to determine the probability of a given sequence of words occurring in a sentence.
             \item Large language Models: Language modelling applied to massive amounts of training data (e.g., wikipedia, news archives, Reddit, etc.)
@@ -188,13 +189,13 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame} {Training language models: based on unstructured text -- in the absence of explicit labels}
-	\begin{figure}
-		\includegraphics[width=0.475\textwidth]{dobermann.png}
-		\hfill
-		\includegraphics[width=0.475\textwidth]{bulldog.png}
-	\end{figure}
-\end{frame}
+%\begin{frame} {Training language models: based on unstructured text -- in the absence of explicit labels}
+%	\begin{figure}
+%		\includegraphics[width=0.475\textwidth]{dobermann.png}
+%		\hfill
+%		\includegraphics[width=0.475\textwidth]{bulldog.png}
+%	\end{figure}
+%\end{frame}
 
 \begin{frame}{Key events in the history of language modeling}
 		\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{language-modelling.png}}
@@ -247,21 +248,21 @@
 %window sizes
 
 
-\begin{frame}{Continous Bag of Words (CBOW) vs skipgram}
-	\begin{itemize}
-		\item CBOW is faster
-		\item skipgram works better for infrequent words
-		\item Both are often used
-		\item Usually, we use larger window sizes (e.g, 5)
-		\item We need to specify the number of dimensions (typically 100--300)
-	\end{itemize}
-	\pause
-	
-	\textit{In any event, as a result of the prediction task, we end up with a \{100|200|300\}-dimensional vector representation of each word.*}
-	
-	
-	\tiny{* If that makes you think of PCA/SVD, that's not completely crazy, see Levy, O., Goldberg, Y., \& Dagan, I. (2018). Improving Distributional Similarity with Lessons Learned from Word Embeddings. \textit{Transactions of the Association for Computational Linguistics, 3}, 211--225. doi:10.1162/tacl\_a\_00134}\\
-\end{frame}
+%\begin{frame}{Continous Bag of Words (CBOW) vs skipgram}
+%	\begin{itemize}
+%		\item CBOW is faster
+%		\item skipgram works better for infrequent words
+%		\item Both are often used
+%		\item Usually, we use larger window sizes (e.g, 5)
+%		\item We need to specify the number of dimensions (typically 100--300)
+%	\end{itemize}
+%	\pause
+%	
+%	\textit{In any event, as a result of the prediction task, we end up with a \{100|200|300\}-dimensional vector representation of each word.*}
+%	
+%	
+%	\tiny{* If that makes you think of PCA/SVD, that's not completely crazy, see Levy, O., Goldberg, Y., \& Dagan, I. (2018). Improving Distributional Similarity with Lessons Learned from Word Embeddings. \textit{Transactions of the Association for Computational Linguistics, 3}, 211--225. doi:10.1162/tacl\_a\_00134}\\
+%\end{frame}
 
 
 %Due to developments in the field of NLP, algorithms have become increasingly apt to understand human language. Word embeddings are the current state of the art for capturing the meaning of texts. Word embeddings are vector representations of words. They are the current state of the art in NLP to understand, capture and process language. The basic idea of word embeddings is that one gets to know a word by looking at the company that it keeps; contexts is crucial in understanding word meaning. 
@@ -287,22 +288,21 @@
 
 \begin{frame}{In supervised machine learning}
 	\begin{itemize}[<+->]
-		\item Modify CountVectorizer or TfIdfVector such that for each term, you do not only count how often it occurs, but also multiply with its embedding vector
-            \item Aggregate these embeddings (e.g., sum or mean) to represent documents with 300 instead of (for example) 10,000 dimensions
-		\item Often, pre-trained embeddings (e.g., trained on the whole wikipedia) are used
-		\item Thus, our supervised model will be able to deal with synonyms and related words!
+            \item Modify CountVectorizer or TfidfVectorizer: 
+            \item For each document, we look up the embedding of each word in a (often) pre-trained embedding model (e.g., trained on the whole Wikipedia)
+            \item We then aggregate these embeddings (e.g., mean or sum)
+            \item For each document, we now have a, for example, 300-dimensional instead of 10,000 dimesional vector.
+		\item Use these vectors to predict the label.
 	\end{itemize}
-	
 
-	
 \end{frame}
 
 \begin{frame}{In supervised machine learning}
 What does this mean? 
 	\begin{itemize}[<+->]
 		\item Our model is smaller
-            \item We can use words in the prediction set \textit{even if they are not in the training dataset}
-            \item We can learn from similar training samples even if they do not use the same words
+            \item We can use words in the prediction set \textit{even if they are not in the training dataset} (as long as it is in the embedding model!)
+            \item We can learn from similar training samples even if they do not use the same exact words
             \item But we may also loose some nuance
 	\end{itemize}
 	
