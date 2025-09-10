@@ -166,3 +166,4 @@ TSWLatexianTemp*
 
 # jupyter notebook
 .ipynb_checkpoints/
+reviewdata.pickle.bz2
