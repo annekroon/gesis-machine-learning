@@ -167,3 +167,12 @@ TSWLatexianTemp*
 # jupyter notebook
 .ipynb_checkpoints/
 reviewdata.pickle.bz2
+fall-2025/fall-2025_exercises/day5/mymodel
+fall-2025/fall-2025_exercises/day5/mymodel.syn1neg.npy
+fall-2025/fall-2025_exercises/day5/mymodel.wv.vectors.npy
+fall-2025/fall-2025_exercises/day5/__pycache__/courseutils.cpython-310.pyc
+fall-2025/fall-2025_exercises/day5/exercise-afternoon/0.26.0'
+.gitignore
+fall-2025/fall-2025_exercises/day5/exercise-afternoon/my_trained_model/config.json
+fall-2025/fall-2025_exercises/day5/exercise-afternoon/my_trained_model/model.safetensors
+fall-2025/fall-2025_exercises/day5/exercise-afternoon/my_trained_model/training_args.bin
