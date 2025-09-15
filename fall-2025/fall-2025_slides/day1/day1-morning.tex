@@ -14,10 +14,12 @@
 \usepackage{subcaption}
 
 \usepackage{tikz-qtree}
+\usetikzlibrary{positioning}
 \setbeamercovered{still covered={\opaqueness<1->{5}},again covered={\opaqueness<1->{100}}}
 
 
 \usepackage{listings}
+\usepackage{animate}
 
 \lstset{
 	basicstyle=\scriptsize\ttfamily,
@@ -120,14 +122,54 @@ minimum height=2em, text width=4em, text centered,]
 \titlepage
 \end{frame}
 
-\begin{frame}{Today}
-\tableofcontents
+\begin{frame}{Can you see the difference?}
+
+\includegraphics[width=0.8\paperwidth,keepaspectratio]{pictures/russian_colours.png}
+
+\textit{The limits of my language mean the limits of my world - Ludwig Wittgenstein}
+\end{frame}
+
+\begin{frame}{Teaching Language to Computers}
+\includegraphics[width=0.8\paperwidth,keepaspectratio]{pictures/kingqueen.png}
+Words and signs are not identical with what they signify, and only acquire meaning through their differences from other words and signs; meaning arises from the differentiation of words\footnote{Derrida, Jacques. "Différance." In \textit{Margins of Philosophy}, translated by Alan Bass. Chicago: University of Chicago Press, 1982.}
+
+\vspace{0.5cm}
+\footnotesize{Image source: Alammar, Jay. "The Illustrated Word2vec." \url{https://jalammar.github.io/illustrated-word2vec/}}
+\end{frame}
+
+\begin{frame}{The Course in a Nutshell}
+\vspace{0.5cm}
+\begin{itemize}
+    \item[\textbf{Day 1}] Say hello to Python
+    \vspace{0.3cm}
+    \item[\textbf{Day 2}] How to turn words into numbers
+    \vspace{0.3cm}
+    \item[\textbf{Day 3}] How to use ML to describe (unsupervised)
+    \vspace{0.3cm}
+    \item[\textbf{Day 4}] How to use ML to predict (supervised)
+    \vspace{0.3cm}
+    \item[\textbf{Day 5}] Making sense of the state-of-the-art
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Frame Title}
+    This is a beginner course
+
+    This is a challenging area to begin in 
+
+    But there is a lot of `noise' in ML/NLP. 
+
+    Working through the foundations helps a lot. 
+    
 \end{frame}
 
 
 \begin{frame} 
 All course materials can be found at\ldots \\
 ~~~~~~~~\url{https://github.com/annekroon/gesis-machine-learning/fall-2025}
+
+
+We will update these daily: `git fetch + git pull' 
 \end{frame}
 
 \section{Introducing\ldots}
@@ -144,7 +186,7 @@ Introducing\ldots \\
 \begin{columns}
 	\column{.3\textwidth}
 	\makebox[\columnwidth]{
-		\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/rupert.jpg}}
+		\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/rupert.png}}
 	\column{.7\textwidth}
 	Rupert Kiddle\\
 	PhD Candidate: Computational Communication Science (RM SocSci, BSc PolSci, BSc Neurosci)\\
@@ -152,18 +194,18 @@ Introducing\ldots \\
 		%\item Studied Communication Science in M\"unster and at the VU 2003--2009
 		%\item PhD candidate @ ASCoR 2009--2012
 		\item Vrije University Amsterdam, Journalism
-  \item interested in (digital) journalism, language modelling and news recommendation.
+  \item interested in digital journalism, social media, language modelling and algorithmic design+effects.
 	\end{itemize}
-	@rptkiddle \textbar r.t.kiddle@vu.nl 
+	r.t.kiddle@vu.nl 
 \end{columns}
 \end{frame}
 
 \begin{frame}{Introducing\ldots} {\huge{Sjoerd}} \small{} 
-\begin{columns}[] \column{.3\textwidth} \makebox[\columnwidth]{ \includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/Marieke_klein.jpg}} \column{.7\textwidth} Marieke van Hoof \\ 
+\begin{columns}[] \column{.3\textwidth} \makebox[\columnwidth]{ \includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/Sjoerd_square.jpg}} \column{.7\textwidth} Sjoerd Stolwijk \\ 
 Senior researcher Utrecht School of Governance (PhD PolCom, MA PolSci)\\
 \begin{itemize} 
     \item just finished postdoc on automatic debate quality metrics, University of Amsterdam
-	\item New project studies political decisionmaking under risk using in-person experiments
+	\item New project studies political decision-making under risk using in-person experiments
 	\item Interested in GLLM text annotation and biases, political decision biases
 \end{itemize} s.b.stolwijk@uu.nl 
 \end{columns} 
@@ -190,37 +232,153 @@ Do you have a dataset you are working on?
 \end{columns}
 \end{frame}
 
-\begin{frame}{Short poll}
+\section{Course overview}
 
-Do you need
-\begin{enumerate}[a]
-	\item an intro
-	\item a brief refresher
-	\item nothing
-\end{enumerate}
+\begin{frame}{What is machine learning for text analysis}
+\begin{itemize}
+  \item <1->Machine Learning is a broad term
+  \item <2>From counting words to generative AI
+  \item <3>We will introduce the basics: focus on understanding the logic
+\end{itemize}
+\end{frame}
 
-on
+% show example vibe coding in our github repo: Please look at the fall-2025 folder, please add some short visuals to illustrate some highlights of the course to the Claude4_example notebook
+\begin{frame}{The practice of Machine learning has changed}
+\begin{itemize}
+  \item <1-> From memorizing commands and delving into documentation to vibe coding
+  \item <2> Consequences for this course: 
+        You need to understand the logic and be able to follow the code 
+        to spot mistakes and solve issues AI can't
+\end{itemize}
+\end{frame}
 
-\begin{enumerate}[i]
-	\item datatypes (int, float, string, lists, dictionaries)
-	\item control flow statements (for, if, try/except)
-	\item ways to run your code (notebooks vs IDE's vs text editors)
-\end{enumerate}
-?
+\begin{frame}{}
 
-\emph{We will try do adapt today's programme to your needs!}
+\Large Two ways of seeing this course: 
+
+\end{frame}
+
+\begin{frame}{1. As a `slice' through the world of ML/NLP}
+
+\includegraphics[width=0.8\paperwidth,keepaspectratio]{pictures/slice_of_nlp.png}
+
+\end{frame}
+
+
+\begin{frame}{2. As a starter toolkit}
+
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{pictures/full_stack.png}
+
+\end{frame}
+
+
+\begin{frame}{The hourglass structure of the course}
+  \centering
+  \begin{tikzpicture}[remember picture,overlay]
+    % Hourglass image
+    \node[anchor=center] (img) at (0,0)
+      {\includegraphics[width=0.6\paperwidth,keepaspectratio]{../pictures/hour_glass.jpg}};
+    
+    % Top text
+    \node[align=center, text width=0.5\paperwidth,
+          fill=white, fill opacity=0.7, text opacity=1, rounded corners=2pt] 
+      at ([yshift=3cm]img.center) {Language as numbers [Day 1-2]};
+
+    % Middle text
+    \node[align=center, text width=0.5\paperwidth,
+          fill=white, fill opacity=0.7, text opacity=1, rounded corners=2pt] 
+      at (img.center) {How to implement model ``X'' [Day 2--5]};
+
+    % Bottom text
+    \node[align=center, text width=0.5\paperwidth,
+          fill=white, fill opacity=0.7, text opacity=1, rounded corners=2pt] 
+      at ([yshift=-3cm]img.center) {Locate your skills within the evolving field and where to find help [Day 5]};
+  \end{tikzpicture}
+\end{frame}
+
+
+
+\begin{frame}{What to expect}
+\begin{itemize}
+	\item Learn how a machine looks at text
+	\item Learn how to implement both traditional and state-of-the-art machine learning models
+	\item We will not go into generative AI
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Today}
+\begin{itemize}
+	\item Python, Python, Python.
+	\item Afternoon: From text to features -> what does a computer see when it reads a text?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{It's OK if you feel like this at the end of today}
+
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{pictures/scared_dayone.png}
 
 \end{frame}
 
 \section{Python: A language, not a program}
 
+\begin{frame}{Frame Title}
+How did everyone go with setup?
 
-\begin{frame}[plain]
-\makebox[\columnwidth]{
-\includegraphics[width=\columnwidth,height=\paperheight,keepaspectratio]{../pictures/knitting.jpg}}
-\footnotesize{An algorithm in a language that's a bit harder (I think) than Python}
+\textbf{Can you run print(`Hello World') in a notebook cell?}
 \end{frame}
 
+
+\begin{frame}{Python is made for \textit{us}}
+\begin{center}
+\includegraphics[width=0.6\textwidth,keepaspectratio]{pictures/files_in_computer.png}
+
+\vspace{0.5cm}
+\textit{(non-computer scientists)}
+
+\vspace{0.8cm}
+\colorbox{lightgray}{\lstinline[basicstyle=\ttfamily\large]{import this}}
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Python is an `object-oriented' programming language}
+\begin{columns}[t]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\textcolor{blue}{\Large\textbf{Abstract Workflow}}\\
+\textit{(Driving a Sports Car)}
+\end{center}
+\small
+\begin{verbatim}
+pip install car-yard
+from car_yard import sports_car
+my_car = sports_car()
+my_car.refuel(fuel)
+my_car.drive()
+\end{verbatim}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{center}
+\textcolor{red}{\Large\textbf{Real Workflow}}\\
+\textit{(Training a Model)}
+\end{center}
+\small
+\begin{verbatim}
+pip install sklearn
+from sklearn.naive_bayes import MultinomialNB
+my_model = MultinomialNB()
+my_model.fit(train_data)
+my_model.predict(test_data)
+\end{verbatim}
+\end{column}
+\end{columns}
+
+\vspace{1cm}
+\begin{center}
+\textbf{Same Pattern:} Install → Import → Create Object → Use Functions or Methods
+\end{center}
+\end{frame}
 
 
 \begin{frame}{Python}
@@ -234,58 +392,11 @@ on
 \end{block}
 
 \begin{block}{Which version?}<3->
-We will use 3.10. Generally a good idea to use a recent version, but not the very latest. 
+We will use 3.12. Generally a good idea to use a recent version, but not the very latest. 
 \end{block}
 \end{frame}
 
 
-
-
-
-
-\begin{frame}[plain]
-\begin{tikzpicture}[node distance = 3cm, auto]
-\node [cloud] (retrieve) {retrieve};
-\node [cloud, right of=retrieve] (process) {process and/or enrich};
-\node [cloud, right of=process] (analyze) {analyze\\ explain\\ predict};
-\node [cloud, right of=analyze] (visualize) {communi-cate};
-
-
-\path [pijltje] (retrieve)--(process);
-\path [pijltje] (process)--(analyze);
-\path [pijltje] (analyze)--(visualize);
-
-
-\node [block, below of = retrieve] (retrievetech) {files\\ APIs\\ scraping};
-\node [block, below of= process] (processtech) {NLP\\ sentiment\\ LDA\\ SML};
-\node [block, below of=analyze] (analyzetech) {group comparisons; statistical tests and models};
-\node [block, below of=visualize] (visualizetech) {visualizations and summary tables};
-
-
-\path [pijltje] (retrievetech)--(processtech);
-\path [pijltje] (processtech)--(analyzetech);
-\path [pijltje] (analyzetech)--(visualizetech);
-
-
-\node [block, below of = retrievetech, fill=green!20] (retrievepython) {glob\\ json \& csv\\ requests\\ lxml\\ \ldots};
-
-\node [block, below of = processtech, fill=green!20] (processpython) {nltk\\ pattern \\ vader \\ gensim\\ scikit-learn \ldots};
-
-\node [block, below of = analyzetech, fill=green!20] (analyzepython) {numpy/scipy\\ pandas\\ statsmodels\\ \ldots};
-
-\node [block, below of = visualizetech, fill=green!20] (visualizepython) {pandas\\ matplotlib\\ seaborn\\ pyldavis\\ \ldots};
-
-\path [line, dashed] (retrieve)--(retrievetech);
-\path [line, dashed] (process)--(processtech);
-\path [line, dashed] (analyze)--(analyzetech);
-\path [line, dashed] (visualize)--(visualizetech);
-
-\path [line, dashed] (retrievetech)--(retrievepython);
-\path [line, dashed] (processtech)--(processpython);
-\path [line, dashed] (analyzetech)--(analyzepython);
-\path [line, dashed] (visualizetech)--(visualizepython);
-\end{tikzpicture}
-\end{frame}
 
 \subsection{A good workflow}
 \begin{frame}
@@ -395,17 +506,6 @@ for url in urls:
 \end{lstlisting}
 \end{frame}
 
-\subsection{Exercise}
-\begin{frame}{Exercises}
-\begin{block}{Did you pass?}
-	\begin{itemize}
-		\item Think of a way to determine for a list of  grades whether they are a pass (>5.5) or fail.
-		\item Can you make that program robust enough to handle invalid input (e.g., a grade as 'ewghjieh')?
-		\item How does your program deal with impossible grades (e.g., 12 or -3)?
-		\item \ldots
-	\end{itemize}
-\end{block}
-\end{frame}
 
 \subsection{datatypes}
 \begin{frame}{Datatypes}
@@ -671,11 +771,11 @@ You have no labels. \onslide<4>{(\footnotesize{You did not measure \texttt{y})}}
 
 \section{Final}
 
-\begin{frame}{This afternoon}
-\begin{block}{Getting started}
-	Getting started with the IMBD dataset
-\end{block}
-\end{frame}
+% \begin{frame}{This afternoon}
+% \begin{block}{Getting started}
+% 	Getting started with the IMBD dataset
+% \end{block}
+% \end{frame}
 
 
 
