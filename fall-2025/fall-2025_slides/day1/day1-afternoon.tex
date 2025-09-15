@@ -30,7 +30,8 @@
 	backgroundcolor=\color[rgb]{0.85,0.90,1}
 }
 
-
+\usepackage{tabularx}
+\usepackage{array}
 
 \lstnewenvironment{lstlistingoutput}{\lstset{basicstyle=\footnotesize\ttfamily,
 		columns=flexible,
@@ -99,6 +100,11 @@
 	\end{columns}
 \end{frame}}
 
+% helper: fixed-height centered cell content
+\newcommand{\fixedrow}[1]{%
+  \begin{minipage}[c][0,8cm][c]{\linewidth}\centering #1
+  \end{minipage}}
+
 
 
 \title[Big Data and Automated Content Analysis]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 1 - Monday  afternoon \\ »From text to features«}
@@ -120,9 +126,59 @@
 
 
 \section{From text to features: vectorizers}
-\begin{frame}[plain]
-From text to features: vectorizers
-\end{frame}	
+%\begin{frame}[plain]
+%From text to features: vectorizers
+%\end{frame}	
+
+\subsection{Machine \emph{Learning}: How to teach it?}
+
+\begin{frame}{Teaching a toddler}
+    \begin{itemize}[<+->]
+        \item point it out
+        \item explain in other words
+        \item from the context: You shall know a word by the company it keeps (Firth)
+        \item we need something even simpler
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{How Humans Learn vs. How Machines Learn}
+\small
+\begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}X  >{\raggedright\arraybackslash}X @{}}
+\toprule
+\textbf{Human Learning} & \textbf{Machine Learning} \\
+\midrule
+\uncover<2->{\fixedrow{\textbf{Example counting}\\(seeing many repetitions)}}
+  & \uncover<2->{\fixedrow{Rule-based systems / Traditional ML}} \\
+
+\uncover<3->{\fixedrow{\textbf{Pointing out}\\(explicit correction / feedback)}}
+  & \uncover<3->{\fixedrow{Supervised learning (labels, corrections)}} \\
+
+\uncover<4->{\fixedrow{\textbf{Explaining in other words}\\(paraphrase / abstraction)}}
+  & \uncover<4->{\fixedrow{Representation learning / Deep Learning}} \\
+
+\uncover<5->{\fixedrow{\textbf{Interpreting context}\\(discourse / world knowledge)}}
+  & \uncover<5->{\fixedrow{Transformers / Generative AI}} \\
+\bottomrule
+\end{tabularx}
+\end{frame}
+
+
+
+\begin{frame}{Evolution of Machine Learning}
+\centering
+\begin{tikzpicture}[scale=0.8, every node/.style={scale=0.9}]
+  % Axes
+  \draw[->,thick] (0,0) -- (9,0) node[right]{\textbf{Explicit $\;\to\;$ Black Box}};
+  \draw[->,thick] (0,0) -- (0,4) node[above,rotate=90]{\textbf{Deceptively Simple $\;\to\;$ Deceptively Easy}};
+
+  % Points along the diagonal trend
+  \node[draw,rounded corners,fill=blue!20,align=center]   (rule) at (1,0.5) {Rule-based};
+  \node[draw,rounded corners,fill=green!20,align=center]  (ml)   at (3,1.2) {Traditional\\ML};
+  \node[draw,rounded corners,fill=orange!20,align=center] (dl)   at (5,2.0) {Deep\\Learning};
+  \node[draw,rounded corners,fill=purple!20,align=center] (tr)   at (7,2.8) {Transformers};
+  \node[draw,rounded corners,fill=red!20,align=center]    (gen)  at (8.8,3.5) {Generative\\AI};
+\end{tikzpicture}
+\end{frame}
 
 
 
@@ -173,6 +229,26 @@ t2 = "This is an example"
 \end{tabular}
 \end{frame}
 
+\begin{frame}{From vector to matrix: Document Term Matrix (DTM)}
+What if the text is cyphered?
+
+t1 = "Siht si na elpmaxe" 
+
+\pause
+
+\begin{tabular}{| c|c|c|c|c|c|c|c|}
+	\hline
+	& a & na & elpmaxe & si & this & Siht & test \\
+	\hline
+	\emph{t2} &0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+	\hline
+\end{tabular}
+\vspace{1cm}
+
+\pause
+\emph{NOTE: The machine does not understand anything about the meaning of each word}
+\end{frame}
+
 
 \question{What can you do with such a matrix? Why would you want to represent a collection of texts in such a way?}
 
@@ -193,6 +269,26 @@ t2 = "This is an example"
 
 \question{But are all terms equally important?}
 
+\subsection{Problems}
+
+\begin{frame}{Maybe we can do better?}
+    What about:
+    \begin{itemize}[<+->]
+        \item negations: ``not left'' or ``didn't''
+        \item context: ``bank'' near ``river'' or near ``money''
+        \item synonyms: ``bike'' or ``bicycle''
+        \item spelling mistakes: ``never'' or ``nevr''
+        \item punctuation: ``did.'' or ``did''
+        \item abbreviations: ``US'' vs ``United States'' vs ``U.S.''
+        \item verb variations: ``biked'' vs ``bikes'' vs "biking"
+        \item word derivations: ``beauty'' versus ``beautiful''
+        \item non-informative words like ``a'', ``and'' or ``with''
+        \item Capitalization: ``Tom, go please'' vs ``Please go, Tom''
+        \item formatting symbols: ``\textbackslash n'' (newline) or ``<br>'' (HTML code)
+    \end{itemize}
+\end{frame}
+
+\subsection{Fix 1: use weighting for informative vs less informative words}
 
 \begin{frame}{The cell entries: raw counts versus tf$\cdot$idf scores}
 	\begin{itemize}
@@ -208,15 +304,14 @@ $\Rightarrow$ we multiply the ``term frequency'' (tf) by the inverse document fr
 \end{frame}
 
 \begin{frame}{tf$\cdot$idf}
-\begin{array}{ccc}
-	
-	w_{i, j}=t f_{i, j} \times \log \left(\frac{N}{d f_{i}}\right) \\ \\
-	
-	t f_{i, j}=\text { number of occurrences of } i \text { in } j \\
-	d f_{i}=\text { number of documents containing } i \\
-	N=\text {total number of documents }
-\end{array}
+\begin{align*}
+  w_{i,j} &= tf_{i,j} \times \log \left(\frac{N}{df_{i}}\right) \\[1em]
+  tf_{i,j} &= \text{ number of occurrences of term $i$ in document $j$} \\[0.5em]
+  df_{i}  &= \text{ number of documents containing term $i$} \\[0.5em]
+  N       &= \text{ total number of documents}
+\end{align*}
 \end{frame}
+
 
 
 \begin{frame}{Is tf$\cdot$idf always better?}
@@ -237,6 +332,8 @@ It depends.
 \end{enumerate}
 \end{frame}
 
+\subsection{Fix 2: Smart tokenization}
+
 \begin{frame}{Vectorizers take care of...}
 \begin{enumerate}[<+->]
 	\item Tokenization: Splitting sentences into tokens (terms, words)
@@ -245,7 +342,7 @@ It depends.
 \end{enumerate}
 \end{frame}
 
-
+\subsection{-- Dealing with massive data intermezzo --}
 
 \begin{frame}{Internal representations}
 \begin{block}{Sparse vs dense matrices}
@@ -268,14 +365,16 @@ It depends.
 }
 
 
-\begin{frame}{Room for improvement?}
+%\begin{frame}{Room for improvement?}
+%
+%\begin{itemize}
+%    	
+%    \item Tomorrow we discuss how we can tokenize %with list comprehensions (and that's often a %good idea!)
+%        \item But if you want to directly get a DTM %instead of a list of tokens you can also %achieve a much cleaner representation %directly with vectorizers 
+%\end{itemize}
+%\end{frame}
 
-\begin{itemize}
-    	
-    \item Tomorrow we discuss how we can tokenize with list comprehensions (and that's often a good idea!)
-        \item But if you want to directly get a DTM instead of a list of tokens you can also achieve a much cleaner representation directly with vectorizers 
-\end{itemize}
-\end{frame}
+\subsection{Fix 3: Preprocessing to deal with f.e. Capitalization, punctuation}
 
 \begin{frame}[fragile]{OK, good enough, perfect?}
 \begin{block}{scikit-learn's CountVectorizer (default settings)}
@@ -312,7 +411,7 @@ dtm_sparse = cv.fit_transform(docs)
 \end{frame}
 
 
-\subsection{Pruning}
+\subsection{Fix 4: Pruning of less informative words}
 
 \begin{frame}{General idea}
 \begin{itemize}
