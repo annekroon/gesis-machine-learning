@@ -1,7 +1,8 @@
- % !TeX document-id = {f19fb972-db1f-447e-9d78-531139c30778}
+% !TeX document-id = {f19fb972-db1f-447e-9d78-531139c30778}
 % !BIB program = biber
 
 %\documentclass[handout]{beamer}
+
 \documentclass[compress]{beamer}
 \usepackage[T1]{fontenc}
 \usetheme[block=fill,subsectionpage=progressbar,sectionpage=progressbar]{metropolis} 
@@ -220,6 +221,47 @@ hate occurs 1 times
 	\item You have a clear theoretical expectation? Bottom-up makes little sense.
 	\item But in any case: you need to transform your text into something ``countable''.
 \end{itemize}
+\end{frame}
+
+\section{Where we left off yesterday}
+
+\begin{frame}{Lego pipeline}
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{pictures/full_stack.png}
+\end{frame}
+
+\begin{frame}{Problems}
+    \begin{itemize}
+        \item negations: ``not left'' or ``didn't''
+        \item context: ``bank'' near ``river'' or near ``money''
+        \item synonyms: ``bike'' or ``bicycle''
+        \item spelling mistakes: ``never'' or ``nevr''
+        \item punctuation: ``did.'' or ``did''
+        \item abbreviations: ``US'' vs ``United States'' vs ``U.S.''
+        \item verb variations: ``biked'' vs ``bikes'' vs "biking"
+        \item word derivations: ``beauty'' versus ``beautiful''
+        \item non-informative words like ``a'', ``and'' or ``with''
+        \item Capitalization: ``Tom, go please'' vs ``Please go, Tom''
+        \item formatting symbols: ``\textbackslash n'' (newline) or ``<br>'' (HTML code)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Four fixes in (nearly) 1 line}
+
+All together: tf$\cdot$idf, smart tokenization, explicit stopword removal, pruning
+\begin{lstlisting}
+myvectorizer = TfidfVectorizer(tokenizer = TreebankWordTokenizer().tokenize, stop_words=mystopwords, max_df=.75, min_df=2)
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Today: customize your preprocessing}
+    Remember the black box nature of more modern models.  
+    Already in the one-liner above, many choices are \emph{hidden}.
+    
+    \vspace{1cm}
+    \pause
+    
+    $\Rightarrow$ Example of AI coding to highlight why understanding is important: use AI wisely!
 \end{frame}
 
 
