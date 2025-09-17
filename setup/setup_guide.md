@@ -193,3 +193,7 @@ You can toggle on/off code completions using the command palette:
 ### Privacy Disclaimer
 
 ⚠️ **Disclaimer:** As with all commercial AI offerings, presume that your interactions with Copilot (and the contents of your code) are retained by Microsoft.
+
+### Additional reading
+Additional for those interested this is the link to Sjoerd's article comparing different generation machine learning models for text annotation:
+https://www.tandfonline.com/doi/full/10.1080/19312458.2025.2553300#abstract
