@@ -103,6 +103,7 @@
 \title[ML in PYthon]{\textbf{A Practical Introduction to Machine Learning in Python} \\Day 4 -- Thursday \\ »Supervised Machine Learning«}
 \author[Rupert Kiddle, Sjoerd Stolwijk]{Rupert Kiddle \\ Sjoerd Stolwijk \\ ~ \\ \footnotesize{r.t.kiddle@vu.nl, @rptkiddle \\ s.b.stolwijk@uu.nl} \\}
 \date{September 17, 2025}
+\date{September 19, 2024}
 \institute[Gesis]{Gesis}
 
 \begin{document}
@@ -122,50 +123,7 @@ Also read chapter 8.5!
 
 \question{Everything clear from this morning?}
 
-\section{The problem of overfitting}
-
-
-\question{Isn't training multiple models and then selecting the best one a bit like $p$-hacking?}
-
-
-\begin{frame}{Yes. We call this problem ``overfitting''.}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{ch09_overfitting}
-	\caption{Underfitting and overfitting. Example adapted from https://scikit-learn.org/stable/auto\_examples/model\_selection/plot\_underfitting\_overfitting.html}
-	\label{fig:overfit}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}{How to avoid overfitting}
-\begin{enumerate}[<+->]
-	\item \textbf{Train/test split. } We already do this. It avoids overfitting on the training data.\footnote{In classical statistics, the $R^2$ of an OLS regression is prone to that. Calculating $R^2$ on a separate test set would be much more conservative.}
-	\item \textbf{Train/validation/test split.} But maybe we overfit on the test data now? We could set aside \textit{third} dataset.
-	\item \textbf{$k$-fold crossvalidation.} Extending the above such that every case is sometimes $k-1$ times part of the training data and 1 time part of the validation data.
-	\item \textbf{Regularization.} (in combination with the above) We ``penalize'' models for being too complex.
-\end{enumerate}
-
-\end{frame}
-
-
-
-\subsection{Train/validation/test split}
-
-\begin{frame}{Train/validation/test split}
-\begin{itemize}
-	\item When you compare a lot of different models (or (hyper-)parameters), you might want to evaluate (compare) them using a third dataset 
-	\item e.g., make 80/20 split (train/test); then split first part again 80/20 (train/validation)
-	\item only use the test data \emph{at the very end} to get a final estimate of how good your model is.
-\end{itemize}
-\pause
-In short: Validation data to \emph{select} the best approach; test data to get the accuracy of the approach you chose.
-\end{frame}
-
-\subsection{Cross-validation}
-
-
+\section{Cross-validation}
 
 \begin{frame}[plain]
 	
@@ -215,15 +173,10 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 
 \end{frame}
 
-
-
-
-
-
 \begin{frame}{Reasons to do Cross-validation}
 	\begin{block}{We do not ``waste'' too much validation data}
 		\begin{itemize}
-			\item If $k=10$ (the most typical value), in each iteration, we use 90\% of the data for training.
+			\item If $k=10$, in each iteration, we use 90\% of the data for training.
 			\item We even use \emph{all} data (except test set, of course) for training at least once.
 			\item With train/validation split, we probably need a larger validation set to be sure (e.g., 80/20)
 			\item Especially relevant when annotation is expensive.
@@ -237,7 +190,7 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 
 \begin{block}{Simple train/test split}
 \begin{itemize}
-	\item introductory examples/pedagical reasons
+	\item introductory examples/pedagogical reasons
 	\item really small dataset where you cannot afford to set aside validation data
 	\item if -- for whatever reason -- you do not compare different models and settings.
 \end{itemize}
@@ -248,7 +201,7 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 \begin{block}{Train/validation/test split}
 	\begin{itemize}
 		\item To compare different model configurations without overfitting on the test data
-		\item Pedacogical reasons, simple start
+		\item Pedagogical reasons, simple start
 		\item Very large datasets or very complex models where setting $k>2$ would lead to prohibtitively expensive computations
 	\end{itemize}
 \end{block}
@@ -260,14 +213,6 @@ Note that a simple 50:50 train/validation split is identical to setting $k=2$
 		\item Best option for comparing multiple models, \emph{especially} when engaging in \emph{hyperparameter tuning} (next section)
 	\end{itemize}
 \end{block}
-
-\framebreak
-
-
-\begin{alertblock}{Also a nice example for changing standards in the field}
-A couple of years ago, you could get away with just doing a train/test split in your paper. Nowadays, chances are high a reviewer will reject this.
-\end{alertblock}
-
 
 \end{frame}
 
@@ -297,7 +242,7 @@ In other words: whether you have or create a train/validation/test or use cross-
 
 \begin{frame}{Hyperparameter optimization with grid search}
 \begin{block}{General idea}
-	Rather than arbitrary trying some configurations, let's systematically test and compare.
+	Rather than arbitrarily trying some configurations, let's systematically test and compare.
 \end{block}
 First idea: Use a for-loop! (Example 11.4 in the book)
 \end{frame}
@@ -348,7 +293,7 @@ You could also use a combined approach where you first use a handwritten loop to
 \subsection{A typical case for gridsearch: The regularization parameter C}
 
 
-\begin{frame}{The regularization parameter $\lambda$ (or $C = .5n\lambda$)}
+\begin{frame}{The regularization parameter $\lambda$ (or $C = \frac{n}{\lambda}$)}
 $$
 %\underset{\boldsymbol{\beta}}{\arg \min }\left[\sum_{i=1}^{n}\left(Y_{i}-\beta_{0}-\sum_{j=1}^{p} \beta_{j} X_{j i}\right)^{2}+\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|^{q}\right]
 \underset{\boldsymbol{\beta}}{\arg \min }\left[\color{blue} \sum_{i=1}^{n}\left(Y_{i}-\beta_{0}-\sum_{j=1}^{p} \beta_{j} X_{j i}\right)^{2}\color{orange} +\lambda \sum_{j=1}^{p}\left|\beta_{j}\right|^{q} \color{black} \right]
@@ -367,11 +312,11 @@ If $\lambda$ is larger, we punish more.
 
 
 
-\begin{frame}{The regularization parameter $\lambda$ (or $C = .5n\lambda$)}
+\begin{frame}{The regularization parameter $\lambda$ (or $C = \frac{n}{\lambda}$)}
 \begin{itemize}[<+->]
 	\item scikit-learn uses regularization by default
 	\item (that's why the coefficients of a logistic regression classifier will differ from a ``traditional'' logistic regression with the statsmodels module)
-	\item Remember that we are \textit{not} interested in a substantive interpretation of the  $\beta$-coefficients but in a good prediction (which is why ``punishing'' large coefficients and hence biasing the coeffients is not a problem at all!)
+	\item Remember that we are \textit{not} interested in a substantive interpretation of the  $\beta$-coefficients but in a good prediction (which is why ``punishing'' large coefficients and hence biasing the coefficients is not a problem at all!)
 	\item The penalty will shrink the coefficients towards zero, \emph{which is very useful to avoid overfitting!}
 	\item As always, there is a lot of extra info on the scikit-learn website
 \end{itemize}
@@ -383,7 +328,7 @@ If $\lambda$ is larger, we punish more.
 
 \begin{frame}{Hyperparameter optimization with grid search}
 	\begin{block}{General idea}
-		Rather than arbitrary trying some combinations of hyperparameters, let's systematically test and compare.
+		Rather than arbitrarily trying some combinations of hyperparameters, let's systematically test and compare.
 	\end{block}
 	
 	\pause
@@ -433,7 +378,7 @@ search = GridSearchCV(estimator=pipeline,
                       param_grid=grid,
                       scoring='accuracy', 
                       cv=5,
-                      n_jobs=-1,  # use all cpus
+                      n_jobs=-1,  # use all cpu's
                       verbose=10)
 search.fit(reviews_train, y_train)
 print(f'Using these hyperparameters {search.best_params_}, we get the best performance:')
@@ -443,7 +388,7 @@ Example 11.6 (book)
 \end{frame}
 
 \begin{frame}[standout]
-Note that the grid is specified as a dictionary where the keys are strings with the name of the step in the pipeline followed by two underscores followed by the parameter to tune, and the values are lists of values.
+Note that the grid is specified as a dictionary where the keys are strings with the name of the step in the pipeline, followed by two underscores, followed by the parameter to tune, and the values are lists of values.
 
 This means that \emph{any} parameter that the classifier or vectorizer takes can be tuned!
 \end{frame}
@@ -454,7 +399,7 @@ This means that \emph{any} parameter that the classifier or vectorizer takes can
 You might have noticed the Pipeline construct in the last example.
 	\begin{itemize}
 		\item Machine learning involves multiple steps (e.g., preprocessing $\rightarrow$ vectorizer $\rightarrow$ classification)
-		\item We did all of them seperately before
+		\item We did all of them separately before
 		\item Nothing wrong with that, but to ease use and evaluation \emph{of the whole process} (as needed for the gridsearch), we can define a \texttt{pipeline}.
 	\end{itemize}
 	
@@ -497,18 +442,7 @@ predictions = pipe.predict([r[0] for r in test])
 \end{frame}
 
 
-
-
-
-
-
-
-
-
-
 \section[More suggestions ]{More suggestions for improving your models}
-
-
 
 \subsection{Tuning decision thresholds with ROC curves}
 
@@ -523,12 +457,11 @@ To transform the probabilities into binary labels, we use a cutoff (default: 0.5
 \begin{itemize}[<+->]
 	\item It makes most sense (intuitively, mathematically)
 	\item But remember our precision/recall tradeoff: maybe we want to be `stricter' or `less strict'
-	\item Maybe it is importance to us that our classifier is balanced and equally good in predicting both classes, even if overall accuracy suffers (slightly) 
+	\item Maybe it is important to us that our classifier is balanced and equally good in predicting both classes, even  if overall accuracy suffers (slightly) 
 \end{itemize}
 \pause
 Let's see what happens if we plot False Positives against True Positives (ROC-curve)
 \end{frame}
-
 
 \begin{frame}{ROC Curve}
 \makebox[\linewidth]{\includegraphics[width=.5\paperwidth,height=.5\paperheight,keepaspectratio]{roccurve}}
@@ -540,18 +473,11 @@ Let's see what happens if we plot False Positives against True Positives (ROC-cu
 \end{frame}
 
 
-\begin{frame}{So, how to we determine the exact value? }
-See notebook
-
-\url{https://github.com/damian0604/bdaca/blob/master/12ec/week10/Determining\%20the\%20cutoff-point\%20in\%20logistic\%20regression.ipynb}
-\end{frame}
-
-
-
-
-
-
-
+%\begin{frame}{So, how to we determine the exact value? }
+%See notebook
+%
+%\url{https://github.com/damian0604/bdaca/blob/master/12ec/week10/Determining\%20the\%20cutoff-%point\%20in\%20logistic\%20regression.ipynb}
+%\end{frame}
 
 
 \begin{frame}{Some further ideas to look into}
@@ -584,14 +510,76 @@ Your classifier probably works better if you have approximately the same amount 
 	E.g, use BOW-features as well as features such as sentence length, number of sentences (or whatever)
 	
 	
-	\url{https://scikit-learn.org/stable/auto\_examples/hetero\_feature\_union.html} or see example in repository
+	\url{https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html}
 \end{block}
-
-
-
 
 \end{frame}
 
+\section{ML versus dictionaries}
+
+\begin{frame}{What \emph{is} our fitted classifier again?}
+	Essentially, just a formula 
+	
+	$$p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_n x_n)}}$$
+	
+	where $\beta_0$ is an intercept\footnote{Machine Learning people sometimes call the intercept ``bias'' (yes, I know, that's confusing)}, $\beta_1$ a coefficient for the frequency (or tf$\cdot$ idf score) of some word, $\beta_2$ a coefficient some other word.
+	
+	If our fitted \emph{vectorizer} contains 5,000 words, we thus have 5,001 coefficients.
+	
+	\tiny{(for logistic regression in this case, but same argument applies to other classifiers as well)}
+	
+\end{frame}
+
+\question{But isn't that then essentially very much like a dictionary, except that the words have different weights?}
+
+
+\begin{frame}{In some sense, yes.}
+	\begin{itemize}
+		\item But we don't pretend that we can construct the dictionary \emph{a priori}.
+		\item It's specifically tailored to our use case.
+		\item The weights are \emph{really} essential here.
+	\end{itemize}
+	
+	\pause
+	We \emph{could} print all coefficient-word pairs, but probably it's enough to just look at those with the largest absolute value:
+\end{frame}
+
+
+\subsection{The explainability of ML}
+
+
+\begin{frame}{ELI5}
+	\makebox[\linewidth]{
+		\includegraphics[width=\paperwidth,height=.8\paperheight,keepaspectratio]{eli5}}
+\end{frame}
+
+\begin{frame}{ELI5}
+	\begin{itemize}
+		\item Inspecting \emph{all} coefficients of a ML model usually doesn't make much sense
+		\item But that does not mean that we cannot understand how the model makes its predictions
+		\item We can look at the most important coefficients
+		\item We can look which words in a given text contributed most to its classification
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Have we solved all problems of dictionaries?}
+	No.
+	
+	For instance, the negation and/or intensifier problem.
+	
+	Possible approaches
+	\begin{itemize}
+		\item $n$-grams as features
+		\item preprocessing (?)
+		\item deep learning 
+		\item \ldots
+	\end{itemize}
+	\pause
+	
+	$\Rightarrow$ \textbf{But ultimately, it's just an empirical question how big the problem is!}
+	
+\end{frame}
 
 
 
