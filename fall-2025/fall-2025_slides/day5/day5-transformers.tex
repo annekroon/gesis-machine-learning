@@ -60,6 +60,12 @@
 \usetikzlibrary{shapes,arrows,matrix}
 \usepackage{multicol}
 
+\usepackage{tabularx}
+% helper: fixed-height centered cell content
+\newcommand{\fixedrow}[1]{%
+  \begin{minipage}[c][1,4cm][c]{\linewidth}\centering #1
+  \end{minipage}}
+  
 \usepackage{subcaption}
 
 \usepackage{booktabs}
@@ -120,7 +126,47 @@
 
 \setbeamercovered{transparent}
 
-\section{Word vectors}
+\section{Recap}
+
+\begin{frame}{How Humans Learn vs. How Machines Learn}
+\small
+\begin{tabularx}{\linewidth}{@{} >{\raggedright\arraybackslash}X  >{\raggedright\arraybackslash}X @{}}
+\toprule
+\textbf{Human Learning}  \\
+\midrule
+\fixedrow{\textbf{Example counting}\\(seeing many repetitions)} 
+
+\fixedrow{\textbf{Pointing out}\\(explicit correction / feedback)} 
+
+\fixedrow{\textbf{Explaining in other words}\\(paraphrase / abstraction)} 
+  
+\fixedrow{\textbf{Interpreting context}\\(discourse / world knowledge)} \\
+\bottomrule
+\end{tabularx}
+\end{frame}
+
+\begin{frame}{Lego pipeline}
+\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{pictures/full_stack.png}
+\end{frame}
+
+\begin{frame}{Timeline of Key Embedding Models}
+\small
+\begin{itemize}
+    \item \textbf{Word2Vec} -- 2014\\
+    \hspace{1em}\textit{Introduced efficient neural word embeddings.}
+    \vspace{0.5em}
+    \item \textbf{Transformers} -- 2017\\
+    \hspace{1em}\textit{Vaswani et al. introduced the Transformer architecture, enabling powerful sequence modeling.}
+    \vspace{0.5em}
+    \item \textbf{BERT} -- 2018\\
+    \hspace{1em}\textit{Devlin et al. introduced BERT, a bidirectional transformer for language understanding.}
+    \vspace{0.5em}
+    \item \textbf{ChatGPT-3.5} -- 2022\\
+    \hspace{1em}\textit{OpenAI released ChatGPT-3.5, a large language model for conversational AI.}
+\end{itemize}
+\end{frame}
+
+\section{Embeddings}
 
 \begin{frame}{Our BOW approach until now}
 	\begin{block}{Representing a document by word frequency counts}
@@ -159,50 +205,36 @@
 \end{center}
 \end{frame}
 
-\begin{frame}{Word embeddings: Continuous vectors}
-	\begin{itemize}
-            \item What if we instead would represent each word by another vector representing its meaning?
-		\item Words are continuous vectors in an N dimensional space
-            \item The dimensions encode (implicit) meaning 
-            \item For, instance, `doberman' and `dog' should be represented by vectors that are close to each other in space, while `kill' and `walk' should be far from each other.
-		\item These are word embeddings!! (or \emph{continuous} or \emph{distributed} vectors or representations)
-		\end{itemize}
-\end{frame}
+%\begin{frame}{Word embeddings: Continuous vectors}
+%	\begin{itemize}
+%            \item What if we instead would represent each word by another vector representing its meaning?
+%		\item Words are continuous vectors in an N dimensional space
+%            \item The dimensions encode (implicit) meaning 
+%            \item For, instance, `doberman' and `dog' should be represented by vectors that are close to each other %in space, while `kill' and `walk' should be far from each other.
+%		\item These are word embeddings!! (or \emph{continuous} or \emph{distributed} vectors or representations)
+%		\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%\begin{center}
+%	\includegraphics[scale=0.5]{bow_continous.png}
+%\end{center}
+%\end{frame}
 
-\begin{frame}
-\begin{center}
-	\includegraphics[scale=0.5]{bow_continous.png}
-\end{center}
-\end{frame}
-
-\subsection{Training word embeddings}
+%\subsection{Training word embeddings}
 
 %\begin{frame}
 %Language modelling refers to a set of techniques that aim determine the probability of a given sequence of words occurring in a sentence.
 %\end{frame}
 
-\begin{frame}{Training word embeddings}
-	\begin{itemize}
-            \item Language modelling is a set of techniques that aim to determine the probability of a given sequence of words occurring in a sentence.
-            \item Large language Models: Language modelling applied to massive amounts of training data (e.g., wikipedia, news archives, Reddit, etc.)
-		\item Often referred to as `pretrained' or `foundation' models.
-	\end{itemize}
-\end{frame}
 
-%\begin{frame} {Training language models: based on unstructured text -- in the absence of explicit labels}
-%	\begin{figure}
-%		\includegraphics[width=0.475\textwidth]{dobermann.png}
-%		\hfill
-%		\includegraphics[width=0.475\textwidth]{bulldog.png}
-%	\end{figure}
+%\begin{frame}{Key events in the history of language modeling}
+%		\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{language-%modelling.png}}
 %\end{frame}
 
-\begin{frame}{Key events in the history of language modeling}
-		\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{language-modelling.png}}
-\end{frame}
 
 
-\section{Non-Contextual \\Embeddings}
+\subsection{Non-Contextual \\Embeddings}
 
 \begin{frame}{``...a word is characterized by the company it keeps...'' (Firth, 1957)}
 	\begin{block}{Word embeddings \ldots}
@@ -214,9 +246,14 @@
 	\end{block}
 \end{frame}
 
+\begin{frame}{Training size vs performance \cite{Burscher2015}}
+    \makebox[\linewidth]{
+        \includegraphics[width=0.95\paperwidth,height=0.8\paperheight,keepaspectratio]{burscher2015-a}
+    }
+\end{frame}
 
 \begin{frame}{Word embeddings:Training algorithms}
-	There are two popular approaches to training word embeddings: GloVe and word2vec.
+	There were two popular approaches to training \'static\' word embeddings: GloVe and word2vec.
 	\begin{itemize}
 		\item GloVe is count-based: dimensionality reduction on the co-occurrence counts matrix.
 		\item Word2Vec is a predictive model: neural network to predict words/contexts
@@ -229,7 +266,7 @@
 
 \begin{frame}{Word2Vec: Continous Bag of Words (CBOW) vs skipgram}
 	Example sentence: ``the quick brown fox jumped over the lazy dog''
-	\begin{block}{CBOW: Predict a word given its context}
+	\begin{block}{CBOW: Predict a word given the words in its context}
 		Dataset:
 		
 		\texttt{([the, brown], quick), ([quick, fox], brown), ([brown, jumped], fox), ...}
@@ -238,7 +275,7 @@
 	\pause
 	
 	
-	\begin{block}{skipgram: Predict the context given the word}	
+	\begin{block}{skipgram: Predict the context words given the target word}	
 		\texttt{(quick, the), (quick, brown), (brown, quick), (brown, fox), ...}
 	\end{block}
 	
@@ -268,23 +305,53 @@
 %Due to developments in the field of NLP, algorithms have become increasingly apt to understand human language. Word embeddings are the current state of the art for capturing the meaning of texts. Word embeddings are vector representations of words. They are the current state of the art in NLP to understand, capture and process language. The basic idea of word embeddings is that one gets to know a word by looking at the company that it keeps; contexts is crucial in understanding word meaning. 
 
 
-\begin{frame}{You can literally calculate with words!}
-	And answer questions such as ``Man is to woman as king is to \_\_\_\_?''
-	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{embeddings.png}}
-	semantic relationships vs. syntactic relationships
-\end{frame}
+%\begin{frame}{You can literally calculate with words!}
+%	And answer questions such as ``Man is to woman as king is to \_\_\_\_?''
+%	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{embeddings.png}}
+%	semantic relationships vs. syntactic relationships
+%\end{frame}
 
 %word vectors that are able to capture the relationships between words in a surprisingly expressive way. Word embeddings are especially effective in understanding analogies, and for example understand that man is to woman as uncle to aunt, and king to king. 
+
+\begin{frame}{From static to contextual embeddings}
+\small
+\begin{itemize}
+    \item \textbf{Word2Vec:}
+    \begin{itemize}
+        \item Learns a single fixed vector for each word.
+        \item Embeddings are based on neighboring words.
+        \item Cannot distinguish between different meanings of a word in different sentences.
+    \end{itemize}
+    \vspace{0.5em}
+    \item \textbf{Transformers:}
+    \begin{itemize}
+        \item Dynamically compute word representations based on the entire sentence.
+        \item Each word's embedding can change depending on surrounding words.
+        \item Attention mechanism allows the model to focus on relevant words anywhere in the input.
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Training contextual word embeddings}
+	\begin{itemize}
+            \item Language modelling is a set of techniques that aim to determine the probability of a given sequence of words occurring in a sentence.
+            \item Large language Models: Language modelling applied to massive amounts of training data (e.g., Wikipedia, news archives, Reddit, etc.)
+		\item Often referred to as `pretrained' or `foundation' models.
+	\end{itemize}
+\end{frame}
+
+\begin{frame} {Training language models: based on unstructured text -- in the absence of explicit labels}
+	\begin{figure}
+		\includegraphics[width=0.475\textwidth]{dobermann.png}
+		\hfill
+		\includegraphics[width=0.475\textwidth]{bulldog.png}
+	\end{figure}
+\end{frame}
 
 \question{What can we use word embeddings for?}
 
 
 \subsection[Improving down-stream classification tasks]{Using word embeddings to improve models}
-\begin{frame}[plain]
-	Using word embeddings to improve down-stream classification tasks.
-\end{frame}
-
-
 
 \begin{frame}{In supervised machine learning}
 	\begin{itemize}[<+->]
@@ -294,7 +361,6 @@
             \item For each document, we now have a, for example, 300-dimensional instead of 10,000 dimesional vector.
 		\item Use these vectors to predict the label.
 	\end{itemize}
-
 \end{frame}
 
 \begin{frame}{In supervised machine learning}
@@ -305,27 +371,24 @@ What does this mean?
             \item We can learn from similar training samples even if they do not use the same exact words
             \item But we may also loose some nuance
 	\end{itemize}
-	
-
-	
 \end{frame}
 
 
-\begin{frame}[plain]
-	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{rudkowsky2018-1}}
-	
-	\tiny{Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, Š., \& Sedlmair, M. (2018). More than Bags of Words: Sentiment Analysis with Word Embeddings. \textit{Communication Methods and Measures, 12}(2–3), 140–157. doi:10.1080/19312458.2018.1455817}
-\end{frame}
+%\begin{frame}[plain]
+%	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{rudkowsky2018-1}}
+%	
+%	\tiny{Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, Š., \& Sedlmair, M. (2018). More than Bags %of Words: Sentiment Analysis with Word Embeddings. \textit{Communication Methods and Measures, 12}(2–3), 140–157. %doi:10.1080/19312458.2018.1455817}
+%\end{frame}
 
 
-\begin{frame}{It's not always black/white\ldots}
-	Sometimes, BOW may be just fine (for very negative sentences, it doesn't matter). But especially in less clear cases ('slightly negative'), embeddings increased performance.
-	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{rudkowsky2018-2}}
-	
-	\vfill
-	
-	\tiny{Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, Š., \& Sedlmair, M. (2018). More than Bags of Words: Sentiment Analysis with Word Embeddings. \textit{Communication Methods and Measures, 12}(2–3), 140–157. doi:10.1080/19312458.2018.1455817}
-\end{frame}
+%\begin{frame}{It's not always black/white\ldots}
+%	Sometimes, BOW may be just fine (for very negative sentences, it doesn't matter). But especially in less clear %cases ('slightly negative'), embeddings increased performance.
+%	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{rudkowsky2018-2}}
+%	
+%	\vfill
+%	
+%	\tiny{Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, Š., \& Sedlmair, M. (2018). More than Bags %of Words: Sentiment Analysis with Word Embeddings. \textit{Communication Methods and Measures, 12}(2–3), 140–157. %doi:10.1080/19312458.2018.1455817}
+%\end{frame}
 
 
 \begin{frame}{In document similarity calculation}
@@ -345,28 +408,31 @@ What does this mean?
 	\end{block}
 \end{frame}
 
-
-\begin{frame}[plain]
-	BUT: This only works for literal overlap. What if the writer chooses synonyms?
-	\pause 
-	
-	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{wmd}}
-	
-	
-	\tiny{Kusner, M. J., Sun, Y., Kolkin, N. I., \& Weinberger, K. Q. (2015). From Word Embeddings To Document Distances. \textit{Proceedings of The 32nd International Conference on Machine Learning} (Vol. 37, pp. 957–966)}
+\begin{frame}{Example Visualization}
+    Ongoing work within the TWON project, visualization credit to Simon M"unker, Trier University
 \end{frame}
 
-
-\begin{frame}{There are several approaches}
-	\begin{itemize}
-		\item word mover's distance
-		\item soft cosine similarity
-	\end{itemize}
-	In common: we use pre-trained embeddings to replace words (that otherwise would just have a random identifier and be unrelated) with vectors representing their meaning, when calculating our measure of interest
-\end{frame}
+%\begin{frame}[plain]
+%	BUT: This only works for literal overlap. What if the writer chooses synonyms?
+%	\pause 
+%	
+%	\makebox[\linewidth]{\includegraphics[width=\linewidth,height=\textheight, keepaspectratio]{wmd}}
+%	
+%	
+%	\tiny{Kusner, M. J., Sun, Y., Kolkin, N. I., \& Weinberger, K. Q. (2015). From Word Embeddings To Document %Distances. \textit{Proceedings of The 32nd International Conference on Machine Learning} (Vol. 37, pp. 957–966)}
+%\end{frame}
+%
+%
+%\begin{frame}{There are several approaches}
+%	\begin{itemize}
+%		\item word mover's distance
+%		\item soft cosine similarity
+%	\end{itemize}
+%	In common: we use pre-trained embeddings to replace words (that otherwise would just have a random identifier and %be unrelated) with vectors representing their meaning, when calculating our measure of interest
+%\end{frame}
+%
 
 \section{Neural networks}
-
 
 \begin{frame}{Neural Networks}
 	\begin{itemize}
@@ -377,6 +443,8 @@ What does this mean?
 	\end{itemize}
 	
 \end{frame}
+
+
 
 \begin{frame}
 	
@@ -437,24 +505,11 @@ What does this mean?
 \end{frame}
 
 
-\begin{frame}[fragile]{Simple feed forward network}
-	\begin{lstlisting}
-model.add(Dense(300, input_dim=input_dim, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-	\end{lstlisting}	
-	
-	\begin{itemize}[<+->]
-		\item Our first layer reduces the input features (e.g., the 10,000 features our CountVectorizer creates) to 300 neurons
-		\item It does so using the relu function $f(x) = max(0, x)$ (as our counts cannot be negartive, just a linear function)
-		\item The second layer reduces the 300 neurons to 1 output neuron using the sigmoid function (the S curve you know fron logistic regression)
-		\item Of course, we can add multiple layers in between if we want to
-	\end{itemize}
-\end{frame}
 
 
 
 \begin{frame}{Convolutional networks}
-	The problem with such a basic networks: just as with classic SML, we still loose all information about order (the ``not good'' problem).
+	The problem with such a basic network: just as with classic SML, we still lose all information about order (the ``not good'' problem).
 	
 	Therefore,
 	\begin{itemize}
@@ -462,7 +517,7 @@ model.add(Dense(1, activation='sigmoid'))
 		\item We apply some filter (essentially, we detect patterns)
 		\item and then pool the results (e.g., taking the maximum)
 	\end{itemize}
-	This means that we now excplitly take into acount \emph{the temporal structure} of a sentence.
+	This means that we now explicitly take into account \emph{the temporal structure} of a sentence.
 \end{frame}
 
 
@@ -474,59 +529,7 @@ model.add(Dense(1, activation='sigmoid'))
 \end{frame}
 
 
-
-\begin{frame}[fragile]{Convolutional networks}
-	\begin{lstlisting}
-model.add(Embedding(input_dim=vocab_size, output_dim=embedding_dim, input_length=maxlen))
-model.add(Conv1D(embedding_dim, 5, activation='relu'))
-model.add(GlobalMaxPooling1D())
-model.add(Dense(300, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
-		
-	\end{lstlisting}	
-	The layers:	
-	\begin{enumerate}[<+->]
-		\item train an embedding model
-		\item apply the convolution with 5 ``timestamps''
-		\item pool using the maximum
-		\item another layer with 300 dimensions
-		\item the final layer with 1 output neuron
-	\end{enumerate}
-\end{frame}
-
-
-\begin{frame}{Convolutional networks}
-	\textbf{Note that the preprocessing differs!}
-	
-	\begin{itemize}
-		\item We do not take a word vector per document as input any more, but \emph{a sequence of words}
-		\item For concatenating, these sequences need to have equal length, which is why we \emph{pad} then
-	\end{itemize}
-	
-\end{frame}
-
-\begin{frame}{LSTM (long short-term memory)}
-	\begin{itemize}
-		\item Unlike ``feed forward'' neural networks, this is  a ``recurrent neural network'' (RNN) -- the training works in two directions
-		\item Heavy in computation, very useful for predicting \emph{sequences}
-		\item Won't cover today
-	\end{itemize}
-\end{frame}
-
-
-\subsection{Using pretrained embeddings}
-
-\begin{frame}{The embedding layer}
-	\begin{itemize}
-		\item Often, the first layer is creating word embeddings
-		\item Good embeddings need a lot of training data
-		\item Training good embeddings needs time
-		\item Therefore, we can replace that layer with a pre-trained embedding layer (!)
-		\item We can even use a hybrid approach and allow the pre-trained embedding layer to be re-trained!
-	\end{itemize}
-\end{frame}
-
-\section{Contextual Embeddings}
+\subsection{Contextual Embeddings}
 
 \begin{frame}
 \begin{alertblock}{Downsides of Non-Contextual Word Embeddings}
@@ -547,48 +550,49 @@ model.add(Dense(1, activation='sigmoid'))
 \end{exampleblock}
 \end{frame}
 
-\section{Transfer learning paradigm}
-
-\begin{frame}{The idea of transfer learning is very powerful}
-	\begin{block}{Transfer Learning paradigm}
-		\begin{enumerate}
-			\item \alert{Pre-train} a model on data that is at hand (e.g., Wikipedia, Google News)
-			\item \alert{Fine-tune} the model on your downstream task (bring in your small-scale annotated dataset)
-		\end{enumerate}
-	By adding `task-specific' heads you can produce specific outputs, e.g., classification, text generation, named entity recognition, etc. 
-	\end{block}
-\end{frame}
-	
 
 \section{Transformer-based models}
 
-\begin{frame}
-	The architecture of transformers is very efficient on modern hardware; transformers process words in parallel.
-	As they are much faster, we can use much more data. 
+\begin{frame}{Attention Mechanism}
+    
+    \begin{center}
+        \Large
+        ``\textit{The animal didn't cross the street because \textcolor{blue}{it} was too tired}''
+    \end{center}
+
+    
+    % Image
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{pictures/attn_mech.png}
+        \caption*{\small Source: Jay Alammar - "The Illustrated Transformer" \\ \url{https://jalammar.github.io/illustrated-transformer/}}
+    \end{figure}
+    
 \end{frame}
+
 
 \begin{frame}{Transformer-based models}
 	\begin{block}{BERT: Bidirectional Encoder Representations from Transformers \parencite{BERT}}
 		\begin{itemize}[<+->]
 			\item (Huge) pre-trained model (by, e.g., Google) 
 			\item Trained on very large amount of text and can use words in context. 
-			\item State of the art performance on the General Language Understanding Evaluation benchmark (GLUE). 
 			\item BERT and other transformer-based models are used for a range of tasks;
 			\begin{enumerate}
-				\item Sentiment analysis
+				\item Sentiment analysis (+/-)
 				\item sequence-to-sequence predictions (e.g., translation)
-				\item similarity and paraphrasing tasks
-				\item natural language inference tasks
+				\item similarity and paraphrasing tasks 
+				\item natural language inference tasks (token prediction)
 		\end{enumerate}
 	\end{itemize}
 	\end{block}
 \end{frame}
 
+
 \begin{frame}{How to use}
 	\begin{block}{HuggingFace}
 		\begin{itemize}[<+->]
 			\item The `HuggingFace`: Python library includes lots of datasets and transformer-based models 
-			\item `HuggingFace`'s API works well with libraries such as `TensorFlow`, `Keras`, and `PyTorch`. 
+			\item `HuggingFace`'s API works well with libraries such as `SentenceTransformer` `TensorFlow`, `Keras`, and `PyTorch`. 
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -599,6 +603,18 @@ model.add(Dense(1, activation='sigmoid'))
 			\item The `HuggingFace`: Python library includes lots of datasets and transformer-based models 
 			\item `HuggingFace`'s API works well with libraries such as `TensorFlow`, `Keras`, and `PyTorch`. 
 		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{Transfer learning paradigm}
+
+\begin{frame}{The idea of transfer learning is very powerful}
+	\begin{block}{Transfer Learning paradigm}
+		\begin{enumerate}
+			\item \alert{Pre-train} a model on data that is at hand (e.g., Wikipedia, Google News)
+			\item \alert{Fine-tune} the model on your downstream task (bring in your small-scale annotated dataset)
+		\end{enumerate}
+	By adding `task-specific' heads you can produce specific outputs, e.g., classification, text generation, named entity recognition, etc. 
 	\end{block}
 \end{frame}
 
@@ -661,13 +677,13 @@ model.add(Dense(1, activation='sigmoid'))
 \end{frame}
 
 
-\begin{frame}{An exmaple from our research}
+\begin{frame}{An example from our colleagues research}
 We trained word embeddings on 3.3 million Dutch news articles.
 	
 Are vector representations of outgroups (Maroccans, Muslims) closer to representations of negative stereotype words than ingroups?
 \vspace{.5cm}
 	
-\tiny{Kroon, A.C., Van der Meer, G.L.A., Jonkman, J.G.F., \&Trilling, D. (in press): Guilty by Association: Using Word Embeddings to Measure Ethnic Stereotypes in News Coverage. \emph{Journalism \& Mass
+\tiny{Kroon, A.C., Van der Meer, G.L.A., Jonkman, J.G.F., \&Trilling, D. (2021): Guilty by Association: Using Word Embeddings to Measure Ethnic Stereotypes in News Coverage. \emph{Journalism \& Mass
 			Communication Quarterly}}
 \end{frame}
 
@@ -698,55 +714,55 @@ Are vector representations of outgroups (Maroccans, Muslims) closer to represent
 Last part: we help you working on (or discussing about) your own projects.
 \end{frame}
 
-
-\section[AEM]{AEM: An application from our own research}
-
-\begin{frame}[plain]
-	We can use pre-trained embeddings -- but can we make even better ones?
-	\textbf{The Amsterdam Embedding Model (AEM)}\\
-	
-	
-	\vspace{1cm}
-	
-	{\footnotesize{Anne Kroon, Antske Fokkens, Damian Trilling, Felicia Loecherbach, Judith Moeller, Mariken A. C. G. van der Velden, Wouter van Atteveldt} }
-\end{frame}
-
-
-
-%For all these tasks, you need to process text. 
-%Humans are obviously very good in this. However, we are not capable of handling %humongous amounts of data. Therefore, we need computers. 
-%For computers, it used to be relatively hard to understand language, to capture %semantic relations, especially in different type of contexts. 
-
-
-\begin{frame}{Why do this?}
-	\begin{itemize}
-		\item Embedding models are of great interest to communication scholars
-		\item yet... Most publicly available models represent \textbf{English} language
-		\item The preparation of good-performing embedding models require a significant amount of \textbf{time} and \textbf{access to a large amount of data sets}
-		\item Few Dutch embedding models are available, but trained on ordinary human language from the World Wide Web.
-		\item These models do not capture the specifics of news article data and are therefore less suitable to study and understand dynamics of this domain
-		\item $\Rightarrow$ No model is available trained on Dutch news data
-	\end{itemize}
-\end{frame}
-
-%Properly trained embedding models are of great interest to communication scholars, because they can help with diverse tasks, such as topic classification, automated sentiment analysis or bias detection. Yet – currently no model exist that is trained on media data – and therefore effectively deals with the particularities of news media data. 
-
-%\subsection{The Amsterdam Embedding Model}
-\begin{frame}{Project's Aim}
-	\begin{block}{Aim of the current project} 
-		\begin{enumerate}
-			\item Develop and evaluate a high-quality embedding model
-			\item Assess performance in downstream tasks of interest to Communication Science (such as topic classification of newspaper data).
-			\item Facilitate distribution and use of the model
-			\item Offer clear methodological recommendations for researchers interested using our Dutch embedding model
-		\end{enumerate}
-	\end{block}
-\end{frame}
-
-%Therefore, this project was set out to develop a good word embedding model trained on Dutch media data, and facilitate its distribution
-
-
-%\subsection{Approach and Preliminary Results}
+%skip AEM example, instead more time to work on own data
+%\section[AEM]{AEM: An application from our own research}
+%
+%\begin{frame}[plain]
+%	We can use pre-trained embeddings -- but can we make even better ones?
+%	\textbf{The Amsterdam Embedding Model (AEM)}\\
+%	
+%	
+%	\vspace{1cm}
+%	
+%	{\footnotesize{Anne Kroon, Antske Fokkens, Damian Trilling, Felicia Loecherbach, Judith Moeller, Mariken A. C. G. %van der Velden, Wouter van Atteveldt} }
+%\end{frame}
+%
+%
+%
+%%For all these tasks, you need to process text. 
+%%Humans are obviously very good in this. However, we are not capable of handling %humongous amounts of data. Therefore, %we need computers. 
+%%For computers, it used to be relatively hard to understand language, to capture %semantic relations, especially in %different type of contexts. 
+%
+%
+%\begin{frame}{Why do this?}
+%	\begin{itemize}
+%		\item Embedding models are of great interest to communication scholars
+%		\item yet... Most publicly available models represent \textbf{English} language
+%		\item The preparation of good-performing embedding models require a significant amount of \textbf{time} and %\textbf{access to a large amount of data sets}
+%		\item Few Dutch embedding models are available, but trained on ordinary human language from the World Wide Web.
+%		\item These models do not capture the specifics of news article data and are therefore less suitable to study %and understand dynamics of this domain
+%		\item $\Rightarrow$ No model is available trained on Dutch news data
+%	\end{itemize}
+%\end{frame}
+%
+%%Properly trained embedding models are of great interest to communication scholars, because they can help with diverse %tasks, such as topic classification, automated sentiment analysis or bias detection. Yet – currently no model exist %that is trained on media data – and therefore effectively deals with the particularities of news media data. 
+%
+%%\subsection{The Amsterdam Embedding Model}
+%\begin{frame}{Project's Aim}
+%	\begin{block}{Aim of the current project} 
+%		\begin{enumerate}
+%			\item Develop and evaluate a high-quality embedding model
+%			\item Assess performance in downstream tasks of interest to Communication Science (such as topic %classification of newspaper data).
+%			\item Facilitate distribution and use of the model
+%			\item Offer clear methodological recommendations for researchers interested using our Dutch embedding model
+%		\end{enumerate}
+%	\end{block}
+%\end{frame}
+%
+%%Therefore, this project was set out to develop a good word embedding model trained on Dutch media data, and facilitate %its distribution
+%
+%
+%%\subsection{Approach and Preliminary Results}
 
 \begin{frame}{Training data}
 	\begin{block}{Training data set}
