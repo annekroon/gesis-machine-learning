@@ -1,5 +1,7 @@
-# GESIS Fall Seminar in Computational Social Science 2025
+# GESIS Fall Seminar in Computational Social Science 2026
 ## Introduction to Machine Learning for Text Analysis with Python
+
+> **⚠️ Important:** This setup guide is in the process of being updated for the 2026 edition of the Fall Seminar. For more information, please reach out to the lecturers.
 
 ### Setup Guide
 
